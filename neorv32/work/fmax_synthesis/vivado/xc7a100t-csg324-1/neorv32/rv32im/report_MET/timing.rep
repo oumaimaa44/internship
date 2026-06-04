@@ -1,0 +1,84 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Fri May 29 11:46:50 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : neorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.013ns  (required time - arrival time)
+  Source:                 u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/r_pnt_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@2.976ns period=5.952ns})
+  Destination:            u_neorv32/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[3].ram_inst/memory_large.spram_reg_1/ENARDEN
+                            (rising edge-triggered cell RAMB36E1 clocked by clk_i  {rise@0.000ns fall@2.976ns period=5.952ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            5.952ns  (clk_i rise@5.952ns - clk_i rise@0.000ns)
+  Data Path Delay:        5.396ns  (logic 1.211ns (22.443%)  route 4.185ns (77.557%))
+  Logic Levels:           5  (LUT4=1 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.065ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.543ns = ( 10.495 - 5.952 ) 
+    Source Clock Delay      (SCD):    4.939ns
+    Clock Pessimism Removal (CPR):    0.331ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=1896, routed)        1.879     4.939    clk_i_IBUF_BUFG
+    SLICE_X7Y22          FDCE                                         r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/r_pnt_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X7Y22          FDCE (Prop_fdce_C_Q)         0.419     5.358 r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/r_pnt_reg[1]/Q
+                         net (fo=2, routed)           0.662     6.019    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/p_1_in
+    SLICE_X7Y24          LUT4 (Prop_lut4_I0_O)        0.296     6.315 r  FSM_onehot_fetch[state][2]_i_3/O
+                         net (fo=3, routed)           0.342     6.657    FSM_onehot_fetch[state][2]_i_3_n_0
+    SLICE_X7Y25          LUT6 (Prop_lut6_I1_O)        0.124     6.781 r  FSM_sequential_state[1]_i_2/O
+                         net (fo=5, routed)           0.396     7.177    u_neorv32/cpu_i_req[0][stb]
+    SLICE_X6Y25          LUT5 (Prop_lut5_I2_O)        0.124     7.301 r  sel_q_i_1/O
+                         net (fo=31, routed)          0.939     8.241    u_neorv32/core_complex_gen[0].neorv32_core_bus_switch_inst/sel
+    SLICE_X5Y26          LUT6 (Prop_lut6_I3_O)        0.124     8.365 f  rden[0]_i_2/O
+                         net (fo=7, routed)           0.759     9.124    rden[0]_i_2_n_0
+    SLICE_X6Y28          LUT6 (Prop_lut6_I3_O)        0.124     9.248 r  memory_large.spram_reg_0_i_1/O
+                         net (fo=2, routed)           1.087    10.334    u_neorv32/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/en_i[3]
+    RAMB36_X0Y2          RAMB36E1                                     r  u_neorv32/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[3].ram_inst/memory_large.spram_reg_1/ENARDEN
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      5.952     5.952 r  
+    N15                                               0.000     5.952 r  clk_i (IN)
+                         net (fo=0)                   0.000     5.952    clk_i
+    N15                  IBUF (Prop_ibuf_I_O)         0.814     6.766 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.911     8.677    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     8.768 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=1896, routed)        1.726    10.495    clk_i_IBUF_BUFG
+    RAMB36_X0Y2          RAMB36E1                                     r  u_neorv32/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[3].ram_inst/memory_large.spram_reg_1/CLKARDCLK
+                         clock pessimism              0.331    10.826    
+                         clock uncertainty           -0.035    10.791    
+    RAMB36_X0Y2          RAMB36E1 (Setup_ramb36e1_CLKARDCLK_ENARDEN)
+                                                     -0.443    10.348    u_neorv32/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[3].ram_inst/memory_large.spram_reg_1
+  -------------------------------------------------------------------
+                         required time                         10.348    
+                         arrival time                         -10.334    
+  -------------------------------------------------------------------
+                         slack                                  0.013    
+
+
+
+

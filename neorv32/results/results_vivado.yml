@@ -1,0 +1,459 @@
+units:
+  Fmax: MHz
+  Static_Power: W
+  Dynamic_Power: W
+  Total_Power: W
+  Frequency: MHz
+fmax_synthesis:
+  xc7a100t-csg324-1:
+    neorv32:
+      rv32i_min:
+        Fmax: 160
+        LUT_count: 1580
+        LUT_percent: 2.49
+        Reg_count: 1356
+        Reg_percent: 1.07
+        LUT+Reg_count: 2936
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.019
+        Total_Power: 0.11
+        Param_Domains:
+          __main__: rv32i_min
+          __timestamp__: 2026-05-29_10-56-13
+      rv32im:
+        Fmax: 168
+        LUT_count: 2195
+        LUT_percent: 3.46
+        Reg_count: 1776
+        Reg_percent: 1.4
+        LUT+Reg_count: 3971
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.033
+        Total_Power: 0.125
+        Param_Domains:
+          __main__: rv32im
+          __timestamp__: 2026-05-29_10-56-13
+      rv32i_fast:
+        Fmax: 153
+        LUT_count: 2379
+        LUT_percent: 3.75
+        Reg_count: 1821
+        Reg_percent: 1.44
+        LUT+Reg_count: 4200
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 4
+        DSP_percent: 1.67
+        Static_Power: 0.092
+        Dynamic_Power: 0.027
+        Total_Power: 0.119
+        Param_Domains:
+          __main__: rv32i_fast
+          __timestamp__: 2026-05-29_10-56-13
+      rv32i:
+        Fmax: 162
+        LUT_count: 2337
+        LUT_percent: 3.69
+        Reg_count: 1798
+        Reg_percent: 1.42
+        LUT+Reg_count: 4135
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.032
+        Total_Power: 0.124
+        Param_Domains:
+          __main__: rv32i
+          __timestamp__: 2026-05-29_10-56-13
+      rv32ic:
+        Fmax: 162
+        LUT_count: 2024
+        LUT_percent: 3.19
+        Reg_count: 1622
+        Reg_percent: 1.28
+        LUT+Reg_count: 3646
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.028
+        Total_Power: 0.12
+        Param_Domains:
+          __main__: rv32ic
+          __timestamp__: 2026-05-29_10-56-13
+      rv32imc:
+        Fmax: 162
+        LUT_count: 2337
+        LUT_percent: 3.69
+        Reg_count: 1798
+        Reg_percent: 1.42
+        LUT+Reg_count: 4135
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.032
+        Total_Power: 0.124
+        Param_Domains:
+          __main__: rv32imc
+          __timestamp__: 2026-05-29_10-56-13
+      neorv32_small:
+        Fmax: 166
+        LUT_count: 1335
+        LUT_percent: 2.11
+        Reg_count: 1222
+        Reg_percent: 0.96
+        LUT+Reg_count: 2557
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.015
+        Total_Power: 0.106
+        Param_Domains:
+          __main__: neorv32_small
+          __timestamp__: 2026-05-29_13-10-48
+      neorv32_fast:
+        Fmax: 153
+        LUT_count: 2379
+        LUT_percent: 3.75
+        Reg_count: 1821
+        Reg_percent: 1.44
+        LUT+Reg_count: 4200
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 4
+        DSP_percent: 1.67
+        Static_Power: 0.092
+        Dynamic_Power: 0.027
+        Total_Power: 0.119
+        Param_Domains:
+          __main__: neorv32_fast
+          __timestamp__: 2026-05-29_13-10-48
+      neorv32_timing:
+        Fmax: 161
+        LUT_count: 2323
+        LUT_percent: 3.66
+        Reg_count: 1831
+        Reg_percent: 1.44
+        LUT+Reg_count: 4154
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.032
+        Total_Power: 0.124
+        Param_Domains:
+          __main__: neorv32_timing
+          __timestamp__: 2026-05-29_13-10-48
+      neorv32_default:
+        Fmax: 159
+        LUT_count: 2335
+        LUT_percent: 3.68
+        Reg_count: 1798
+        Reg_percent: 1.42
+        LUT+Reg_count: 4133
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.032
+        Total_Power: 0.124
+        Param_Domains:
+          __main__: neorv32_default
+          __timestamp__: 2026-05-29_13-10-48
+      neorv32_isa:
+        Fmax: 156
+        LUT_count: 2958
+        LUT_percent: 4.67
+        Reg_count: 1894
+        Reg_percent: 1.49
+        LUT+Reg_count: 4852
+        BRAM_count: 8
+        BRAM_percent: 5.93
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.092
+        Dynamic_Power: 0.034
+        Total_Power: 0.126
+        Param_Domains:
+          __main__: neorv32_isa
+          __timestamp__: 2026-05-29_13-10-48
+custom_freq_synthesis:
+  xc7a100t-csg324-1:
+    neorv32:
+      neorv32_default:
+        100MHz:
+          Frequency: 100
+          LUT_count: 2260
+          LUT_percent: 3.56
+          Reg_count: 1734
+          Reg_percent: 1.37
+          LUT+Reg_count: 3994
+          BRAM_count: 9
+          BRAM_percent: 6.67
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.024
+          Total_Power: 0.116
+          Param_Domains:
+            __main__: neorv32_default
+            __timestamp__: 2026-05-29_13-11-09
+        300MHz:
+          Frequency: 300
+          LUT_count: 2431
+          LUT_percent: 3.83
+          Reg_count: 1829
+          Reg_percent: 1.44
+          LUT+Reg_count: 4260
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.059
+          Total_Power: 0.151
+          Param_Domains:
+            __main__: neorv32_default
+            __timestamp__: 2026-05-29_13-11-09
+        200MHz:
+          Frequency: 200
+          LUT_count: 2405
+          LUT_percent: 3.79
+          Reg_count: 1814
+          Reg_percent: 1.43
+          LUT+Reg_count: 4219
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.041
+          Total_Power: 0.133
+          Param_Domains:
+            __main__: neorv32_default
+            __timestamp__: 2026-05-29_13-11-09
+      neorv32_fast:
+        100MHz:
+          Frequency: 100
+          LUT_count: 2274
+          LUT_percent: 3.59
+          Reg_count: 1759
+          Reg_percent: 1.39
+          LUT+Reg_count: 4033
+          BRAM_count: 9
+          BRAM_percent: 6.67
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.092
+          Dynamic_Power: 0.027
+          Total_Power: 0.119
+          Param_Domains:
+            __main__: neorv32_fast
+            __timestamp__: 2026-05-29_13-11-09
+        200MHz:
+          Frequency: 200
+          LUT_count: 2472
+          LUT_percent: 3.9
+          Reg_count: 1854
+          Reg_percent: 1.46
+          LUT+Reg_count: 4326
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.092
+          Dynamic_Power: 0.037
+          Total_Power: 0.129
+          Param_Domains:
+            __main__: neorv32_fast
+            __timestamp__: 2026-05-29_13-11-09
+        300MHz:
+          Frequency: 300
+          LUT_count: 2497
+          LUT_percent: 3.94
+          Reg_count: 1848
+          Reg_percent: 1.46
+          LUT+Reg_count: 4345
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.092
+          Dynamic_Power: 0.078
+          Total_Power: 0.17
+          Param_Domains:
+            __main__: neorv32_fast
+            __timestamp__: 2026-05-29_13-11-09
+      neorv32_isa:
+        100MHz:
+          Frequency: 100
+          LUT_count: 2846
+          LUT_percent: 4.49
+          Reg_count: 1831
+          Reg_percent: 1.44
+          LUT+Reg_count: 4677
+          BRAM_count: 9
+          BRAM_percent: 6.67
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.029
+          Total_Power: 0.121
+          Param_Domains:
+            __main__: neorv32_isa
+            __timestamp__: 2026-05-29_13-11-09
+        300MHz:
+          Frequency: 300
+          LUT_count: 3172
+          LUT_percent: 5.0
+          Reg_count: 1917
+          Reg_percent: 1.51
+          LUT+Reg_count: 5089
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.075
+          Total_Power: 0.167
+          Param_Domains:
+            __main__: neorv32_isa
+            __timestamp__: 2026-05-29_13-11-09
+        200MHz:
+          Frequency: 200
+          LUT_count: 3113
+          LUT_percent: 4.91
+          Reg_count: 1913
+          Reg_percent: 1.51
+          LUT+Reg_count: 5026
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.047
+          Total_Power: 0.139
+          Param_Domains:
+            __main__: neorv32_isa
+            __timestamp__: 2026-05-29_13-11-09
+      neorv32_small:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1273
+          LUT_percent: 2.01
+          Reg_count: 1158
+          Reg_percent: 0.91
+          LUT+Reg_count: 2431
+          BRAM_count: 9
+          BRAM_percent: 6.67
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.013
+          Total_Power: 0.105
+          Param_Domains:
+            __main__: neorv32_small
+            __timestamp__: 2026-05-29_13-11-09
+        200MHz:
+          Frequency: 200
+          LUT_count: 1372
+          LUT_percent: 2.16
+          Reg_count: 1230
+          Reg_percent: 0.97
+          LUT+Reg_count: 2602
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.017
+          Total_Power: 0.108
+          Param_Domains:
+            __main__: neorv32_small
+            __timestamp__: 2026-05-29_13-11-09
+        300MHz:
+          Frequency: 300
+          LUT_count: 1397
+          LUT_percent: 2.2
+          Reg_count: 1240
+          Reg_percent: 0.98
+          LUT+Reg_count: 2637
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.023
+          Total_Power: 0.115
+          Param_Domains:
+            __main__: neorv32_small
+            __timestamp__: 2026-05-29_13-11-09
+      neorv32_timing:
+        100MHz:
+          Frequency: 100
+          LUT_count: 2252
+          LUT_percent: 3.55
+          Reg_count: 1767
+          Reg_percent: 1.39
+          LUT+Reg_count: 4019
+          BRAM_count: 9
+          BRAM_percent: 6.67
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.024
+          Total_Power: 0.116
+          Param_Domains:
+            __main__: neorv32_timing
+            __timestamp__: 2026-05-29_13-11-09
+        300MHz:
+          Frequency: 300
+          LUT_count: 2417
+          LUT_percent: 3.81
+          Reg_count: 1862
+          Reg_percent: 1.47
+          LUT+Reg_count: 4279
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.064
+          Total_Power: 0.156
+          Param_Domains:
+            __main__: neorv32_timing
+            __timestamp__: 2026-05-29_13-11-09
+        200MHz:
+          Frequency: 200
+          LUT_count: 2387
+          LUT_percent: 3.76
+          Reg_count: 1854
+          Reg_percent: 1.46
+          LUT+Reg_count: 4241
+          BRAM_count: 8
+          BRAM_percent: 5.93
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.092
+          Dynamic_Power: 0.043
+          Total_Power: 0.135
+          Param_Domains:
+            __main__: neorv32_timing
+            __timestamp__: 2026-05-29_13-11-09

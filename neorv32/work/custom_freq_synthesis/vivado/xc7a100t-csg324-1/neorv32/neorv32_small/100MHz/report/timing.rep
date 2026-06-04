@@ -1,0 +1,104 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Fri May 29 13:18:55 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : neorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.730ns  (required time - arrival time)
+  Source:                 u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg/CLKBWRCLK
+                            (rising edge-triggered cell RAMB36E1 clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg/DIADI[25]
+                            (rising edge-triggered cell RAMB36E1 clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        8.970ns  (logic 4.676ns (52.128%)  route 4.294ns (47.872%))
+  Logic Levels:           11  (CARRY4=7 LUT3=1 LUT5=2 LUT6=1)
+  Clock Path Skew:        -0.023ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.545ns = ( 14.545 - 10.000 ) 
+    Source Clock Delay      (SCD):    4.915ns
+    Clock Pessimism Removal (CPR):    0.347ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=1216, routed)        1.856     4.915    clk_i_IBUF_BUFG
+    RAMB36_X0Y7          RAMB36E1                                     r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg/CLKBWRCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB36_X0Y7          RAMB36E1 (Prop_ramb36e1_CLKBWRCLK_DOBDO[3])
+                                                      2.454     7.369 r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg/DOBDO[3]
+                         net (fo=8, routed)           1.571     8.940    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/rs2[3]
+    SLICE_X21Y30         LUT3 (Prop_lut3_I2_O)        0.150     9.090 r  serial_shifter.serial[cnt][3]_i_2/O
+                         net (fo=3, routed)           0.747     9.838    serial_shifter.serial[cnt][3]_i_2_n_0
+    SLICE_X24Y32         LUT5 (Prop_lut5_I3_O)        0.326    10.164 r  req[addr][3]_i_6/O
+                         net (fo=1, routed)           0.000    10.164    req[addr][3]_i_6_n_0
+    SLICE_X24Y32         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401    10.565 r  req_reg[addr][3]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.565    req_reg[addr][3]_i_1_n_0
+    SLICE_X24Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.679 r  req_reg[addr][7]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.679    req_reg[addr][7]_i_1_n_0
+    SLICE_X24Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.793 r  req_reg[addr][11]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.793    req_reg[addr][11]_i_1_n_0
+    SLICE_X24Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.907 r  req_reg[addr][15]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    10.907    req_reg[addr][15]_i_1_n_0
+    SLICE_X24Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.021 r  req_reg[addr][19]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    11.021    req_reg[addr][19]_i_1_n_0
+    SLICE_X24Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.135 r  req_reg[addr][23]_i_1/CO[3]
+                         net (fo=1, routed)           0.000    11.135    req_reg[addr][23]_i_1_n_0
+    SLICE_X24Y38         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.348    11.483 r  req_reg[addr][27]_i_1/O[1]
+                         net (fo=3, routed)           0.579    12.062    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/alu_add[25]
+    SLICE_X27Y40         LUT6 (Prop_lut6_I5_O)        0.303    12.365 r  arch_sram_sync.regfile_reg_i_52/O
+                         net (fo=1, routed)           0.433    12.798    arch_sram_sync.regfile_reg_i_52_n_0
+    SLICE_X27Y40         LUT5 (Prop_lut5_I4_O)        0.124    12.922 r  arch_sram_sync.regfile_reg_i_12/O
+                         net (fo=1, routed)           0.963    13.885    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/rf_wdata[25]
+    RAMB36_X0Y7          RAMB36E1                                     r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg/DIADI[25]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+    N15                                               0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i
+    N15                  IBUF (Prop_ibuf_I_O)         0.814    10.814 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.911    12.725    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    12.816 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=1216, routed)        1.728    14.545    clk_i_IBUF_BUFG
+    RAMB36_X0Y7          RAMB36E1                                     r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg/CLKARDCLK
+                         clock pessimism              0.347    14.892    
+                         clock uncertainty           -0.035    14.857    
+    RAMB36_X0Y7          RAMB36E1 (Setup_ramb36e1_CLKARDCLK_DIADI[25])
+                                                     -0.241    14.616    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/arch_sram_sync.regfile_reg
+  -------------------------------------------------------------------
+                         required time                         14.616    
+                         arrival time                         -13.885    
+  -------------------------------------------------------------------
+                         slack                                  0.730    
+
+
+
+

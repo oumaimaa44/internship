@@ -1,0 +1,41 @@
+arch_name: neorv32/neorv32_isa
+arch_display_name: neorv32/neorv32_isa @ 100 MHz
+lib_name: LIB_xc7a100t-csg324-1_neorv32_neorv32_isa_100MHz
+target: xc7a100t-csg324-1
+rtl_path: rtl
+script_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/neorv32/neorv32_isa/100MHz/scripts
+report_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/neorv32/neorv32_isa/100MHz/report
+log_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/neorv32/neorv32_isa/100MHz/log
+tmp_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/neorv32/neorv32_isa/100MHz
+design_path: null
+design_path_whitelist: []
+design_path_blacklist: []
+source_rtl_path: rtl/core
+arch_path: odatix_userconfig/architectures
+clock_signal: clk_i
+reset_signal: rstn_i
+top_level_module: neorv32_soc_top
+top_level_file: neorv32_soc_top.vhd
+use_parameters: true
+start_delimiter: generic (
+stop_delimiter: );
+file_copy_enable: false
+file_copy_source: /dev/null
+file_copy_dest: /dev/null
+script_copy_enable: false
+script_copy_source: /dev/null
+fmax_lower_bound: None
+fmax_upper_bound: None
+range_list:
+- 100
+- 200
+- 300
+target_frequency: 100
+param_target_filename: rtl/neorv32_soc_top.vhd
+generate_rtl: false
+generate_command: ''
+constraint_filename: constraints.xdc
+install_path: /net/users/oelmouden/neorv32
+param_domains: {}
+continue_on_error: false
+force_single_thread: false

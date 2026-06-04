@@ -1,0 +1,88 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Fri May 29 14:04:57 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : neorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.027ns  (required time - arrival time)
+  Source:                 u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/r_pnt_reg[0]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@3.205ns period=6.410ns})
+  Destination:            u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_control_inst/ctrl_reg[csr_addr][0]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@3.205ns period=6.410ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            6.410ns  (clk_i rise@6.410ns - clk_i rise@0.000ns)
+  Data Path Delay:        6.100ns  (logic 1.622ns (26.589%)  route 4.478ns (73.411%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT6=4 RAMD32=1)
+  Clock Path Skew:        -0.042ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.491ns = ( 10.901 - 6.410 ) 
+    Source Clock Delay      (SCD):    4.865ns
+    Clock Pessimism Removal (CPR):    0.331ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2014, routed)        1.805     4.865    clk_i_IBUF_BUFG
+    SLICE_X12Y29         FDCE                                         r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/r_pnt_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X12Y29         FDCE (Prop_fdce_C_Q)         0.518     5.383 r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/r_pnt_reg[0]/Q
+                         net (fo=22, routed)          1.144     6.526    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/ipb_reg_0_1_6_11/ADDRC0
+    SLICE_X14Y31         RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     6.679 f  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/ipb_reg_0_1_6_11/RAMC/O
+                         net (fo=7, routed)           0.388     7.068    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/ipb_reg_0_1_6_11_n_5
+    SLICE_X15Y31         LUT3 (Prop_lut3_I0_O)        0.331     7.399 f  exec[irc][10]_i_1/O
+                         net (fo=13, routed)          0.640     8.038    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/frontend[i16][10]
+    SLICE_X17Y31         LUT6 (Prop_lut6_I0_O)        0.124     8.162 r  exec[ir][5]_i_6/O
+                         net (fo=2, routed)           0.454     8.617    exec[ir][5]_i_6_n_0
+    SLICE_X18Y31         LUT4 (Prop_lut4_I0_O)        0.124     8.741 r  exec[ir][20]_i_6/O
+                         net (fo=8, routed)           0.625     9.365    exec[ir][20]_i_6_n_0
+    SLICE_X18Y29         LUT6 (Prop_lut6_I0_O)        0.124     9.489 f  exec[ir][4]_i_2/O
+                         net (fo=2, routed)           0.432     9.922    exec[ir][4]_i_2_n_0
+    SLICE_X18Y30         LUT6 (Prop_lut6_I4_O)        0.124    10.046 r  ctrl[csr_addr][11]_i_2/O
+                         net (fo=1, routed)           0.444    10.490    ctrl[csr_addr][11]_i_2_n_0
+    SLICE_X18Y30         LUT6 (Prop_lut6_I1_O)        0.124    10.614 r  ctrl[csr_addr][11]_i_1/O
+                         net (fo=12, routed)          0.351    10.965    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_control_inst/ctrl_nxt[csr_addr]
+    SLICE_X18Y29         FDCE                                         r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_control_inst/ctrl_reg[csr_addr][0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      6.410     6.410 r  
+    N15                                               0.000     6.410 r  clk_i (IN)
+                         net (fo=0)                   0.000     6.410    clk_i
+    N15                  IBUF (Prop_ibuf_I_O)         0.814     7.224 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.911     9.135    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     9.226 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2014, routed)        1.675    10.901    clk_i_IBUF_BUFG
+    SLICE_X18Y29         FDCE                                         r  u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_control_inst/ctrl_reg[csr_addr][0]/C
+                         clock pessimism              0.331    11.233    
+                         clock uncertainty           -0.035    11.197    
+    SLICE_X18Y29         FDCE (Setup_fdce_C_CE)      -0.205    10.992    u_neorv32/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_control_inst/ctrl_reg[csr_addr][0]
+  -------------------------------------------------------------------
+                         required time                         10.992    
+                         arrival time                         -10.965    
+  -------------------------------------------------------------------
+                         slack                                  0.027    
+
+
+
+

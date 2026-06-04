@@ -1,0 +1,1 @@
+--debug "typical" "work.neorv32_tb" -s "neorv32_tb_sim" 
