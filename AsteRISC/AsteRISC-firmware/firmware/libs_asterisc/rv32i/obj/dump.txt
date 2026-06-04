@@ -1,0 +1,315 @@
+In archive ../ar/libasterisc.a:
+
+asterisc.o:     file format elf32-littleriscv
+
+
+Disassembly of section .sdata:
+
+00000000 <debug7_bits>:
+   0:	0070                	.2byte	0x70
+   2:	0a00                	.2byte	0xa00
+
+00000004 <debug6_bits>:
+   4:	0060                	.2byte	0x60
+   6:	0a00                	.2byte	0xa00
+
+00000008 <debug5_bits>:
+   8:	0050                	.2byte	0x50
+   a:	0a00                	.2byte	0xa00
+
+0000000c <debug4_bits>:
+   c:	0040                	.2byte	0x40
+   e:	0a00                	.2byte	0xa00
+
+00000010 <debug3_bits>:
+  10:	0030                	.2byte	0x30
+  12:	0a00                	.2byte	0xa00
+
+00000014 <debug2_bits>:
+  14:	0020                	.2byte	0x20
+  16:	0a00                	.2byte	0xa00
+
+00000018 <debug1_bits>:
+  18:	0010                	.2byte	0x10
+  1a:	0a00                	.2byte	0xa00
+
+0000001c <debug0_bits>:
+  1c:	0000                	.2byte	0x0
+  1e:	0a00                	.2byte	0xa00
+
+00000020 <debug7>:
+  20:	0070                	.2byte	0x70
+  22:	0a00                	.2byte	0xa00
+
+00000024 <debug6>:
+  24:	0060                	.2byte	0x60
+  26:	0a00                	.2byte	0xa00
+
+00000028 <debug5>:
+  28:	0050                	.2byte	0x50
+  2a:	0a00                	.2byte	0xa00
+
+0000002c <debug4>:
+  2c:	0040                	.2byte	0x40
+  2e:	0a00                	.2byte	0xa00
+
+00000030 <debug3>:
+  30:	0030                	.2byte	0x30
+  32:	0a00                	.2byte	0xa00
+
+00000034 <debug2>:
+  34:	0020                	.2byte	0x20
+  36:	0a00                	.2byte	0xa00
+
+00000038 <debug1>:
+  38:	0010                	.2byte	0x10
+  3a:	0a00                	.2byte	0xa00
+
+0000003c <debug0>:
+  3c:	0000                	.2byte	0x0
+  3e:	0a00                	.2byte	0xa00
+
+00000040 <gpio_pulldown_en>:
+  40:	0040                	.2byte	0x40
+  42:	0400                	.2byte	0x400
+
+00000044 <gpio_pullup_en>:
+  44:	0030                	.2byte	0x30
+  46:	0400                	.2byte	0x400
+
+00000048 <gpio_output_en>:
+  48:	0020                	.2byte	0x20
+  4a:	0400                	.2byte	0x400
+
+0000004c <gpio_read_value>:
+  4c:	0010                	.2byte	0x10
+  4e:	0400                	.2byte	0x400
+
+00000050 <gpio_write_value>:
+  50:	0000                	.2byte	0x0
+  52:	0400                	.2byte	0x400
+
+00000054 <timer0_config_bits>:
+  54:	0000                	.2byte	0x0
+  56:	0800                	.2byte	0x800
+
+00000058 <timer0_compare>:
+  58:	0080                	.2byte	0x80
+  5a:	0800                	.2byte	0x800
+
+0000005c <timer0_scaled_counter>:
+  5c:	0048                	.2byte	0x48
+  5e:	0800                	.2byte	0x800
+
+00000060 <timer0_counter_lsb>:
+  60:	0040                	.2byte	0x40
+  62:	0800                	.2byte	0x800
+
+00000064 <timer0_counter_msb>:
+  64:	0020                	.2byte	0x20
+  66:	0800                	.2byte	0x800
+
+00000068 <timer0_config>:
+  68:	0000                	.2byte	0x0
+  6a:	0800                	.2byte	0x800
+
+0000006c <pwm0_config_bits>:
+  6c:	0000                	.2byte	0x0
+  6e:	0500                	.2byte	0x500
+
+00000070 <pwm0_compare3>:
+  70:	00b0                	.2byte	0xb0
+  72:	0500                	.2byte	0x500
+
+00000074 <pwm0_compare2>:
+  74:	00a0                	.2byte	0xa0
+  76:	0500                	.2byte	0x500
+
+00000078 <pwm0_compare1>:
+  78:	0090                	.2byte	0x90
+  7a:	0500                	.2byte	0x500
+
+0000007c <pwm0_compare0>:
+  7c:	0080                	.2byte	0x80
+  7e:	0500                	.2byte	0x500
+
+00000080 <pwm0_scaled_counter>:
+  80:	0040                	.2byte	0x40
+  82:	0500                	.2byte	0x500
+
+00000084 <pwm0_counter>:
+  84:	0020                	.2byte	0x20
+  86:	0500                	.2byte	0x500
+
+00000088 <pwm0_config>:
+  88:	0000                	.2byte	0x0
+  8a:	0500                	.2byte	0x500
+
+0000008c <spi_data_rx_bits>:
+  8c:	0090                	.2byte	0x90
+  8e:	0b00                	.2byte	0xb00
+
+00000090 <spi_data_tx_bits>:
+  90:	0070                	.2byte	0x70
+  92:	0b00                	.2byte	0xb00
+
+00000094 <spi_status_rx_bits>:
+  94:	0060                	.2byte	0x60
+  96:	0b00                	.2byte	0xb00
+
+00000098 <spi_status_tx_bits>:
+  98:	0050                	.2byte	0x50
+  9a:	0b00                	.2byte	0xb00
+
+0000009c <spi_start_pattern_msk_bits>:
+  9c:	0040                	.2byte	0x40
+  9e:	0b00                	.2byte	0xb00
+
+000000a0 <spi_start_pattern_bits>:
+  a0:	0030                	.2byte	0x30
+  a2:	0b00                	.2byte	0xb00
+
+000000a4 <spi_cmp_pattern_msk_bits>:
+  a4:	0020                	.2byte	0x20
+  a6:	0b00                	.2byte	0xb00
+
+000000a8 <spi_cmp_pattern_bits>:
+  a8:	0010                	.2byte	0x10
+  aa:	0b00                	.2byte	0xb00
+
+000000ac <spi_config_bits>:
+  ac:	0000                	.2byte	0x0
+  ae:	0b00                	.2byte	0xb00
+
+000000b0 <spi_status_miso_fifo_empty>:
+  b0:	0060                	.2byte	0x60
+  b2:	0b00                	.2byte	0xb00
+
+000000b4 <spi_status_miso_fifo_full>:
+  b4:	0050                	.2byte	0x50
+  b6:	0b00                	.2byte	0xb00
+
+000000b8 <spi_status_mosi_fifo_empty_x4>:
+  b8:	0078                	.2byte	0x78
+  ba:	0b00                	.2byte	0xb00
+
+000000bc <spi_status_mosi_fifo_empty>:
+  bc:	0070                	.2byte	0x70
+  be:	0b00                	.2byte	0xb00
+
+000000c0 <spi_status_mosi_fifo_full>:
+  c0:	0060                	.2byte	0x60
+  c2:	0b00                	.2byte	0xb00
+
+000000c4 <spi_data_rx_x4>:
+  c4:	00a0                	.2byte	0xa0
+  c6:	0b00                	.2byte	0xb00
+
+000000c8 <spi_data_rx>:
+  c8:	0090                	.2byte	0x90
+  ca:	0b00                	.2byte	0xb00
+
+000000cc <spi_data_tx>:
+  cc:	0070                	.2byte	0x70
+  ce:	0b00                	.2byte	0xb00
+
+000000d0 <spi_status_rx>:
+  d0:	0060                	.2byte	0x60
+  d2:	0b00                	.2byte	0xb00
+
+000000d4 <spi_status_tx>:
+  d4:	0050                	.2byte	0x50
+  d6:	0b00                	.2byte	0xb00
+
+000000d8 <spi_start_pattern_msk>:
+  d8:	0040                	.2byte	0x40
+  da:	0b00                	.2byte	0xb00
+
+000000dc <spi_start_pattern>:
+  dc:	0030                	.2byte	0x30
+  de:	0b00                	.2byte	0xb00
+
+000000e0 <spi_cmp_pattern_msk>:
+  e0:	0020                	.2byte	0x20
+  e2:	0b00                	.2byte	0xb00
+
+000000e4 <spi_cmp_pattern>:
+  e4:	0010                	.2byte	0x10
+  e6:	0b00                	.2byte	0xb00
+
+000000e8 <spi_config>:
+  e8:	0000                	.2byte	0x0
+  ea:	0b00                	.2byte	0xb00
+
+000000ec <uart0_status_bits>:
+  ec:	0030                	.2byte	0x30
+  ee:	0900                	.2byte	0x900
+
+000000f0 <uart0_config_bits>:
+  f0:	0020                	.2byte	0x20
+  f2:	0900                	.2byte	0x900
+
+000000f4 <uart0_data_rx_bits>:
+  f4:	0010                	.2byte	0x10
+  f6:	0900                	.2byte	0x900
+
+000000f8 <uart0_data_tx_bits>:
+  f8:	0000                	.2byte	0x0
+  fa:	0900                	.2byte	0x900
+
+000000fc <uart0_status>:
+  fc:	0030                	.2byte	0x30
+  fe:	0900                	.2byte	0x900
+
+00000100 <uart0_config>:
+ 100:	0020                	.2byte	0x20
+ 102:	0900                	.2byte	0x900
+
+00000104 <uart0_data_rx>:
+ 104:	0010                	.2byte	0x10
+ 106:	0900                	.2byte	0x900
+
+00000108 <uart0_data_tx>:
+ 108:	0000                	.2byte	0x0
+ 10a:	0900                	.2byte	0x900
+
+0000010c <iof_config_bits>:
+ 10c:	0000                	.2byte	0x0
+ 10e:	0500                	.2byte	0x500
+
+00000110 <iof_sel>:
+ 110:	0000                	.2byte	0x0
+ 112:	0300                	.2byte	0x300
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	4700                	.2byte	0x4700
+   2:	203a4343          	.4byte	0x203a4343
+   6:	6728                	.2byte	0x6728
+   8:	6532                	.2byte	0x6532
+   a:	3565                	.2byte	0x3565
+   c:	3465                	.2byte	0x3465
+   e:	31303033          	.4byte	0x31303033
+  12:	2938                	.2byte	0x2938
+  14:	3120                	.2byte	0x3120
+  16:	2e32                	.2byte	0x2e32
+  18:	2e32                	.2byte	0x2e32
+  1a:	0030                	.2byte	0x30
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1b41                	.2byte	0x1b41
+   2:	0000                	.2byte	0x0
+   4:	7200                	.2byte	0x7200
+   6:	7369                	.2byte	0x7369
+   8:	01007663          	bgeu	zero,a6,14 <debug2_bits>
+   c:	0011                	.2byte	0x11
+   e:	0000                	.2byte	0x0
+  10:	1004                	.2byte	0x1004
+  12:	7205                	.2byte	0x7205
+  14:	3376                	.2byte	0x3376
+  16:	6932                	.2byte	0x6932
+  18:	7032                	.2byte	0x7032
+  1a:	0030                	.2byte	0x30

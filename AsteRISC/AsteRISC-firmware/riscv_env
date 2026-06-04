@@ -1,0 +1,29 @@
+
+###################################################
+# Edit this file to set your RISCV toolchain path #
+###################################################
+
+# RISC-V toolchain install path
+RISCV_DIR=/opt/riscv32
+
+# Target triple <machine>-<vendor>-<os>
+RISCV_TT=riscv32-unknown-elf
+#RISCV_TT=riscv64-unknown-elf
+
+# Binary folder for gcc, as, ld, etc.
+RISCV_BIN=${RISCV_DIR}/bin
+
+# .a library folder for libc, etc
+RISCV_LIB=${RISCV_DIR}/${RISCV_TT}/lib
+# RISCV_LIB=${RISCV_DIR}/${RISCV_TT}/lib/rv32i/ilp32
+# RISCV_LIB=${RISCV_DIR}/${RISCV_TT}/lib/rv64i/lp64
+
+# .h include folder for libc, etc
+RISCV_INC=${RISCV_DIR}/${RISCV_TT}/include
+
+# GCC library to use
+RISCV_GCC_LIB=rv32i/ilp32
+# RISCV_GCC_LIB=rv64i/lp64
+
+# Python3 command
+PYTHON3=python3

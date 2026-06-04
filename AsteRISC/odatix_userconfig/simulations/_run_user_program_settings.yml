@@ -1,0 +1,36 @@
+
+##############################################
+# Settings for simulations
+##############################################
+---
+
+# overwrite existing results
+overwrite:        Yes  # overridden by -o / --overwrite
+
+# prompt 'Continue? (Y/n)' after settings checks
+ask_continue:     Yes  # overridden by -y / --noask
+
+# exit monitor when all jobs are done
+exit_when_done:   No   # overridden by -E / --exit
+
+# size of the log history per job in the monitor
+log_size_limit:   300  # overridden by --logsize
+
+# maximum number of parallel jobs
+nb_jobs:          8    # overridden by -j / --jobs
+
+# simulations targeted
+simulations: 
+
+#--------------------------------------------#
+# AsteRISC
+#--------------------------------------------#
+
+  - user_program:
+    # Run on all main AsteRISC configurations
+    #- AsteRISC/* + MEM/4096I_4096D + Baseline/I + Mul/Off
+
+    # Run only on M0000
+    - AsteRISC/M0000 + MEM/4096I_4096D + Baseline/I + Mul/Off
+
+...

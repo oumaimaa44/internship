@@ -1,0 +1,11 @@
+
+#define AWESOME_MESSAGE "Hello from AsteRISC!\n"
+
+#define UART_TX_GPIO 19
+#define UART_RX_GPIO 18
+
+#define SWITCH_GPIO 15
+#define SWLED_GPIO  7
+
+#define TARGET_FREQUENCY 40000000
+#define UART_BAUDRATE    BAUD_115200

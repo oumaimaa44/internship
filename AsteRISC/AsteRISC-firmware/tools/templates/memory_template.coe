@@ -1,0 +1,13 @@
+; #**********************************************************************#
+; #                               AsteRISC                               #
+; #**********************************************************************#
+; 
+; ${FILENAME}
+; 
+; WARNING: This file was auto-generated (${DATE}, from ${SOURCE}).
+; 
+; Manual changes to this file may cause unexpected behavior in your application.
+; Manual changes to this file will be overwritten if the code is regenerated.
+
+memory_initialization_radix=16;
+memory_initialization_vector=${CONTENT};
