@@ -1,0 +1,101 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Thu May 28 15:04:49 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : picorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.137ns  (required time - arrival time)
+  Source:                 cpu/reg_op2_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Destination:            cpu/pcpi_div/divisor_reg[62]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            5.000ns  (clk rise@5.000ns - clk rise@0.000ns)
+  Data Path Delay:        5.081ns  (logic 2.479ns (48.793%)  route 2.602ns (51.207%))
+  Logic Levels:           10  (CARRY4=8 LUT1=1 LUT6=1)
+  Clock Path Skew:        -0.052ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.475ns = ( 9.475 - 5.000 ) 
+    Source Clock Delay      (SCD):    4.859ns
+    Clock Pessimism Removal (CPR):    0.331ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_IBUF_BUFG_inst/O
+                         net (fo=932, routed)         1.799     4.859    clk_IBUF_BUFG
+    SLICE_X18Y23         FDRE                                         r  cpu/reg_op2_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X18Y23         FDRE (Prop_fdre_C_Q)         0.456     5.315 f  cpu/reg_op2_reg[2]/Q
+                         net (fo=16, routed)          1.332     6.646    cpu/reg_op2_reg_n_0_[2]
+    SLICE_X44Y29         LUT1 (Prop_lut1_I0_O)        0.124     6.770 r  divisor[35]_i_6/O
+                         net (fo=1, routed)           0.480     7.251    cpu/pcpi_div/p_0_out[2]
+    SLICE_X45Y29         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.674     7.925 r  divisor_reg[35]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.925    divisor_reg[35]_i_2_n_0
+    SLICE_X45Y30         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.039 r  divisor_reg[39]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.039    divisor_reg[39]_i_2_n_0
+    SLICE_X45Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.153 r  divisor_reg[43]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.153    divisor_reg[43]_i_2_n_0
+    SLICE_X45Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.267 r  divisor_reg[47]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.267    divisor_reg[47]_i_2_n_0
+    SLICE_X45Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.381 r  divisor_reg[51]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.381    divisor_reg[51]_i_2_n_0
+    SLICE_X45Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.495 r  divisor_reg[55]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.495    divisor_reg[55]_i_2_n_0
+    SLICE_X45Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.609 r  divisor_reg[59]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.609    divisor_reg[59]_i_2_n_0
+    SLICE_X45Y36         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.239     8.848 r  divisor_reg[62]_i_3/O[2]
+                         net (fo=1, routed)           0.789     9.637    cpu/pcpi_div/divisor2[31]
+    SLICE_X51Y27         LUT6 (Prop_lut6_I0_O)        0.302     9.939 r  divisor[62]_i_2/O
+                         net (fo=1, routed)           0.000     9.939    divisor[62]_i_2_n_0
+    SLICE_X51Y27         FDRE                                         r  cpu/pcpi_div/divisor_reg[62]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        5.000     5.000 r  
+    N15                                               0.000     5.000 r  clk (IN)
+                         net (fo=0)                   0.000     5.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.814     5.814 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.911     7.725    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.816 r  clk_IBUF_BUFG_inst/O
+                         net (fo=932, routed)         1.659     9.475    clk_IBUF_BUFG
+    SLICE_X51Y27         FDRE                                         r  cpu/pcpi_div/divisor_reg[62]/C
+                         clock pessimism              0.331     9.807    
+                         clock uncertainty           -0.035     9.771    
+    SLICE_X51Y27         FDRE (Setup_fdre_C_D)        0.031     9.802    cpu/pcpi_div/divisor_reg[62]
+  -------------------------------------------------------------------
+                         required time                          9.802    
+                         arrival time                          -9.939    
+  -------------------------------------------------------------------
+                         slack                                 -0.137    
+
+
+
+

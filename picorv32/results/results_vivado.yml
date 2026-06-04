@@ -1,0 +1,855 @@
+units:
+  Fmax: MHz
+  Static_Power: W
+  Dynamic_Power: W
+  Total_Power: W
+  Frequency: MHz
+fmax_synthesis:
+  xc7a100t-csg324-1:
+    picorv32:
+      small:
+        Fmax: 187
+        LUT_count: 753
+        LUT_percent: 1.19
+        Reg_count: 432
+        Reg_percent: 0.34
+        LUT+Reg_count: 1185
+        BRAM_count: 1
+        BRAM_percent: 0.74
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.084
+        Dynamic_Power: 0.016
+        Total_Power: 0.1
+        Param_Domains:
+          __main__: small
+          __timestamp__: 2026-05-27_13-44-13
+      fast:
+        Fmax: 188
+        LUT_count: 1482
+        LUT_percent: 2.34
+        Reg_count: 894
+        Reg_percent: 0.71
+        LUT+Reg_count: 2376
+        BRAM_count: 1
+        BRAM_percent: 0.74
+        DSP_count: 4
+        DSP_percent: 1.67
+        Static_Power: 0.091
+        Dynamic_Power: 0.036
+        Total_Power: 0.127
+        Param_Domains:
+          __main__: fast
+          __timestamp__: 2026-05-27_13-44-13
+      irq:
+        Fmax: 189
+        LUT_count: 1768
+        LUT_percent: 2.79
+        Reg_count: 688
+        Reg_percent: 0.54
+        LUT+Reg_count: 2456
+        BRAM_count: 0
+        BRAM_percent: 0.0
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.029
+        Total_Power: 0.12
+        Param_Domains:
+          __main__: irq
+          __timestamp__: 2026-05-27_13-44-13
+      default:
+        Fmax: 205
+        LUT_count: 926
+        LUT_percent: 1.46
+        Reg_count: 576
+        Reg_percent: 0.45
+        LUT+Reg_count: 1502
+        BRAM_count: 1
+        BRAM_percent: 0.74
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.021
+        Total_Power: 0.112
+        Param_Domains:
+          __main__: default
+          __timestamp__: 2026-05-27_13-44-13
+      rv32imc:
+        Fmax: 147
+        LUT_count: 2256
+        LUT_percent: 3.56
+        Reg_count: 992
+        Reg_percent: 0.78
+        LUT+Reg_count: 3248
+        BRAM_count: 0
+        BRAM_percent: 0.0
+        DSP_count: 4
+        DSP_percent: 1.67
+        Static_Power: 0.091
+        Dynamic_Power: 0.034
+        Total_Power: 0.125
+        Param_Domains:
+          __main__: rv32imc
+          __timestamp__: 2026-05-28_14-18-15
+      rv32im:
+        Fmax: 193
+        LUT_count: 1504
+        LUT_percent: 2.37
+        Reg_count: 1055
+        Reg_percent: 0.83
+        LUT+Reg_count: 2559
+        BRAM_count: 1
+        BRAM_percent: 0.74
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.032
+        Total_Power: 0.123
+        Param_Domains:
+          __main__: rv32im
+          __timestamp__: 2026-05-28_14-18-15
+      timing:
+        Fmax: 222
+        LUT_count: 1477
+        LUT_percent: 2.33
+        Reg_count: 646
+        Reg_percent: 0.51
+        LUT+Reg_count: 2123
+        BRAM_count: 0
+        BRAM_percent: 0.0
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.031
+        Total_Power: 0.122
+        Param_Domains:
+          __main__: timing
+          __timestamp__: 2026-05-27_13-44-13
+      rv32i:
+        Fmax: 200
+        LUT_count: 918
+        LUT_percent: 1.45
+        Reg_count: 576
+        Reg_percent: 0.45
+        LUT+Reg_count: 1494
+        BRAM_count: 1
+        BRAM_percent: 0.74
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.021
+        Total_Power: 0.112
+        Param_Domains:
+          __main__: rv32i
+          __timestamp__: 2026-05-28_14-18-15
+      rv32ic:
+        Fmax: 136
+        LUT_count: 1204
+        LUT_percent: 1.9
+        Reg_count: 609
+        Reg_percent: 0.48
+        LUT+Reg_count: 1813
+        BRAM_count: 1
+        BRAM_percent: 0.74
+        DSP_count: 0
+        DSP_percent: 0.0
+        Static_Power: 0.091
+        Dynamic_Power: 0.018
+        Total_Power: 0.109
+        Param_Domains:
+          __main__: rv32ic
+          __timestamp__: 2026-05-28_14-18-15
+custom_freq_synthesis:
+  xc7a100t-csg324-1:
+    picorv32:
+      default:
+        100MHz:
+          Frequency: 100
+          LUT_count: 908
+          LUT_percent: 1.43
+          Reg_count: 576
+          Reg_percent: 0.45
+          LUT+Reg_count: 1484
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.01
+          Total_Power: 0.101
+          Param_Domains:
+            __main__: default
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 918
+          LUT_percent: 1.45
+          Reg_count: 576
+          Reg_percent: 0.45
+          LUT+Reg_count: 1494
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.021
+          Total_Power: 0.112
+          Param_Domains:
+            __main__: default
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 1533
+          LUT_percent: 2.42
+          Reg_count: 660
+          Reg_percent: 0.52
+          LUT+Reg_count: 2193
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.048
+          Total_Power: 0.139
+          Param_Domains:
+            __main__: default
+            __timestamp__: 2026-05-28_13-45-48
+      irq:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1185
+          LUT_percent: 1.87
+          Reg_count: 656
+          Reg_percent: 0.52
+          LUT+Reg_count: 1841
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.01
+          Total_Power: 0.101
+          Param_Domains:
+            __main__: irq
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 1781
+          LUT_percent: 2.81
+          Reg_count: 689
+          Reg_percent: 0.54
+          LUT+Reg_count: 2470
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.029
+          Total_Power: 0.12
+          Param_Domains:
+            __main__: irq
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 1813
+          LUT_percent: 2.86
+          Reg_count: 695
+          Reg_percent: 0.55
+          LUT+Reg_count: 2508
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.044
+          Total_Power: 0.135
+          Param_Domains:
+            __main__: irq
+            __timestamp__: 2026-05-28_13-45-48
+      fast:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1447
+          LUT_percent: 2.28
+          Reg_count: 830
+          Reg_percent: 0.65
+          LUT+Reg_count: 2277
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.018
+          Total_Power: 0.109
+          Param_Domains:
+            __main__: fast
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 1529
+          LUT_percent: 2.41
+          Reg_count: 833
+          Reg_percent: 0.66
+          LUT+Reg_count: 2362
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.057
+          Total_Power: 0.148
+          Param_Domains:
+            __main__: fast
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 1476
+          LUT_percent: 2.33
+          Reg_count: 877
+          Reg_percent: 0.69
+          LUT+Reg_count: 2353
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.041
+          Total_Power: 0.132
+          Param_Domains:
+            __main__: fast
+            __timestamp__: 2026-05-28_13-45-48
+      rv32im:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1486
+          LUT_percent: 2.34
+          Reg_count: 1055
+          Reg_percent: 0.83
+          LUT+Reg_count: 2541
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.015
+          Total_Power: 0.106
+          Param_Domains:
+            __main__: rv32im
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 1503
+          LUT_percent: 2.37
+          Reg_count: 1055
+          Reg_percent: 0.83
+          LUT+Reg_count: 2558
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.032
+          Total_Power: 0.123
+          Param_Domains:
+            __main__: rv32im
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 2165
+          LUT_percent: 3.41
+          Reg_count: 1119
+          Reg_percent: 0.88
+          LUT+Reg_count: 3284
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.06
+          Total_Power: 0.151
+          Param_Domains:
+            __main__: rv32im
+            __timestamp__: 2026-05-28_13-45-48
+        500MHz:
+          Frequency: 500
+          LUT_count: 2177
+          LUT_percent: 3.43
+          Reg_count: 1112
+          Reg_percent: 0.88
+          LUT+Reg_count: 3289
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.102
+          Total_Power: 0.193
+          Param_Domains:
+            __main__: rv32im
+            __timestamp__: 2026-05-28_14-38-21
+        400MHz:
+          Frequency: 400
+          LUT_count: 2191
+          LUT_percent: 3.46
+          Reg_count: 1148
+          Reg_percent: 0.91
+          LUT+Reg_count: 3339
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.08
+          Total_Power: 0.171
+          Param_Domains:
+            __main__: rv32im
+            __timestamp__: 2026-05-28_14-38-21
+      rv32imc:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1598
+          LUT_percent: 2.52
+          Reg_count: 870
+          Reg_percent: 0.69
+          LUT+Reg_count: 2468
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.024
+          Total_Power: 0.115
+          Param_Domains:
+            __main__: rv32imc
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 2332
+          LUT_percent: 3.68
+          Reg_count: 978
+          Reg_percent: 0.77
+          LUT+Reg_count: 3310
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.063
+          Total_Power: 0.154
+          Param_Domains:
+            __main__: rv32imc
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 2363
+          LUT_percent: 3.73
+          Reg_count: 941
+          Reg_percent: 0.74
+          LUT+Reg_count: 3304
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.105
+          Total_Power: 0.196
+          Param_Domains:
+            __main__: rv32imc
+            __timestamp__: 2026-05-28_13-45-48
+        400MHz:
+          Frequency: 400
+          LUT_count: 2366
+          LUT_percent: 3.73
+          Reg_count: 932
+          Reg_percent: 0.74
+          LUT+Reg_count: 3298
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.106
+          Total_Power: 0.197
+          Param_Domains:
+            __main__: rv32imc
+            __timestamp__: 2026-05-28_14-38-21
+        500MHz:
+          Frequency: 500
+          LUT_count: 2365
+          LUT_percent: 3.73
+          Reg_count: 933
+          Reg_percent: 0.74
+          LUT+Reg_count: 3298
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.092
+          Dynamic_Power: 0.154
+          Total_Power: 0.246
+          Param_Domains:
+            __main__: rv32imc
+            __timestamp__: 2026-05-28_14-38-21
+      small:
+        100MHz:
+          Frequency: 100
+          LUT_count: 779
+          LUT_percent: 1.23
+          Reg_count: 434
+          Reg_percent: 0.34
+          LUT+Reg_count: 1213
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.084
+          Dynamic_Power: 0.011
+          Total_Power: 0.095
+          Param_Domains:
+            __main__: small
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 790
+          LUT_percent: 1.25
+          Reg_count: 434
+          Reg_percent: 0.34
+          LUT+Reg_count: 1224
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.084
+          Dynamic_Power: 0.022
+          Total_Power: 0.106
+          Param_Domains:
+            __main__: small
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 1469
+          LUT_percent: 2.32
+          Reg_count: 458
+          Reg_percent: 0.36
+          LUT+Reg_count: 1927
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.084
+          Dynamic_Power: 0.047
+          Total_Power: 0.131
+          Param_Domains:
+            __main__: small
+            __timestamp__: 2026-05-28_13-45-48
+      timing:
+        100MHz:
+          Frequency: 100
+          LUT_count: 881
+          LUT_percent: 1.39
+          Reg_count: 614
+          Reg_percent: 0.48
+          LUT+Reg_count: 1495
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.011
+          Total_Power: 0.102
+          Param_Domains:
+            __main__: timing
+            __timestamp__: 2026-05-28_13-45-48
+        200MHz:
+          Frequency: 200
+          LUT_count: 900
+          LUT_percent: 1.42
+          Reg_count: 614
+          Reg_percent: 0.48
+          LUT+Reg_count: 1514
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.023
+          Total_Power: 0.114
+          Param_Domains:
+            __main__: timing
+            __timestamp__: 2026-05-28_13-45-48
+        300MHz:
+          Frequency: 300
+          LUT_count: 1511
+          LUT_percent: 2.38
+          Reg_count: 662
+          Reg_percent: 0.52
+          LUT+Reg_count: 2173
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.045
+          Total_Power: 0.136
+          Param_Domains:
+            __main__: timing
+            __timestamp__: 2026-05-28_13-45-48
+      rv32i:
+        100MHz:
+          Frequency: 100
+          LUT_count: 908
+          LUT_percent: 1.43
+          Reg_count: 576
+          Reg_percent: 0.45
+          LUT+Reg_count: 1484
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.01
+          Total_Power: 0.101
+          Param_Domains:
+            __main__: rv32i
+            __timestamp__: 2026-05-28_14-38-21
+        200MHz:
+          Frequency: 200
+          LUT_count: 918
+          LUT_percent: 1.45
+          Reg_count: 576
+          Reg_percent: 0.45
+          LUT+Reg_count: 1494
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.021
+          Total_Power: 0.112
+          Param_Domains:
+            __main__: rv32i
+            __timestamp__: 2026-05-28_14-38-21
+        300MHz:
+          Frequency: 300
+          LUT_count: 1533
+          LUT_percent: 2.42
+          Reg_count: 660
+          Reg_percent: 0.52
+          LUT+Reg_count: 2193
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.048
+          Total_Power: 0.139
+          Param_Domains:
+            __main__: rv32i
+            __timestamp__: 2026-05-28_14-38-21
+        400MHz:
+          Frequency: 400
+          LUT_count: 1546
+          LUT_percent: 2.44
+          Reg_count: 663
+          Reg_percent: 0.52
+          LUT+Reg_count: 2209
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.054
+          Total_Power: 0.145
+          Param_Domains:
+            __main__: rv32i
+            __timestamp__: 2026-05-28_14-38-21
+        500MHz:
+          Frequency: 500
+          LUT_count: 1541
+          LUT_percent: 2.43
+          Reg_count: 654
+          Reg_percent: 0.52
+          LUT+Reg_count: 2195
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.07
+          Total_Power: 0.161
+          Param_Domains:
+            __main__: rv32i
+            __timestamp__: 2026-05-28_14-38-21
+      rv32ic:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1149
+          LUT_percent: 1.81
+          Reg_count: 609
+          Reg_percent: 0.48
+          LUT+Reg_count: 1758
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.012
+          Total_Power: 0.103
+          Param_Domains:
+            __main__: rv32ic
+            __timestamp__: 2026-05-28_14-38-21
+        300MHz:
+          Frequency: 300
+          LUT_count: 1771
+          LUT_percent: 2.79
+          Reg_count: 647
+          Reg_percent: 0.51
+          LUT+Reg_count: 2418
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.058
+          Total_Power: 0.149
+          Param_Domains:
+            __main__: rv32ic
+            __timestamp__: 2026-05-28_14-38-21
+        200MHz:
+          Frequency: 200
+          LUT_count: 1749
+          LUT_percent: 2.76
+          Reg_count: 642
+          Reg_percent: 0.51
+          LUT+Reg_count: 2391
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.04
+          Total_Power: 0.131
+          Param_Domains:
+            __main__: rv32ic
+            __timestamp__: 2026-05-28_14-38-21
+        500MHz:
+          Frequency: 500
+          LUT_count: 1770
+          LUT_percent: 2.79
+          Reg_count: 647
+          Reg_percent: 0.51
+          LUT+Reg_count: 2417
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.111
+          Total_Power: 0.202
+          Param_Domains:
+            __main__: rv32ic
+            __timestamp__: 2026-05-28_14-38-21
+        400MHz:
+          Frequency: 400
+          LUT_count: 1777
+          LUT_percent: 2.8
+          Reg_count: 652
+          Reg_percent: 0.51
+          LUT+Reg_count: 2429
+          BRAM_count: 0
+          BRAM_percent: 0.0
+          DSP_count: 0
+          DSP_percent: 0.0
+          Static_Power: 0.091
+          Dynamic_Power: 0.067
+          Total_Power: 0.158
+          Param_Domains:
+            __main__: rv32ic
+            __timestamp__: 2026-05-28_14-38-21
+      rv32imf:
+        100MHz:
+          Frequency: 100
+          LUT_count: 1408
+          LUT_percent: 2.22
+          Reg_count: 837
+          Reg_percent: 0.66
+          LUT+Reg_count: 2245
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.017
+          Total_Power: 0.108
+          Param_Domains:
+            __main__: rv32imf
+            __timestamp__: 2026-05-28_14-38-21
+        200MHz:
+          Frequency: 200
+          LUT_count: 1457
+          LUT_percent: 2.3
+          Reg_count: 838
+          Reg_percent: 0.66
+          LUT+Reg_count: 2295
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.038
+          Total_Power: 0.129
+          Param_Domains:
+            __main__: rv32imf
+            __timestamp__: 2026-05-28_14-38-21
+        400MHz:
+          Frequency: 400
+          LUT_count: 1501
+          LUT_percent: 2.37
+          Reg_count: 837
+          Reg_percent: 0.66
+          LUT+Reg_count: 2338
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.074
+          Total_Power: 0.165
+          Param_Domains:
+            __main__: rv32imf
+            __timestamp__: 2026-05-28_14-38-21
+        300MHz:
+          Frequency: 300
+          LUT_count: 1509
+          LUT_percent: 2.38
+          Reg_count: 837
+          Reg_percent: 0.66
+          LUT+Reg_count: 2346
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.055
+          Total_Power: 0.146
+          Param_Domains:
+            __main__: rv32imf
+            __timestamp__: 2026-05-28_14-38-21
+        500MHz:
+          Frequency: 500
+          LUT_count: 1512
+          LUT_percent: 2.38
+          Reg_count: 838
+          Reg_percent: 0.66
+          LUT+Reg_count: 2350
+          BRAM_count: 1
+          BRAM_percent: 0.74
+          DSP_count: 4
+          DSP_percent: 1.67
+          Static_Power: 0.091
+          Dynamic_Power: 0.088
+          Total_Power: 0.179
+          Param_Domains:
+            __main__: rv32imf
+            __timestamp__: 2026-05-28_14-38-21

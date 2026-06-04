@@ -1,0 +1,12 @@
+Binary search for interval [100:500] MHz
+
+300 MHz: VIOLATED
+200 MHz: VIOLATED
+150 MHz: MET
+175 MHz: MET
+187 MHz: MET
+193 MHz: MET
+196 MHz: VIOLATED
+194 MHz: VIOLATED
+
+Highest frequency with timing constraints being met: 193 MHz

@@ -1,0 +1,11 @@
+Binary search for interval [10:100] MHz
+
+55 MHz: MET
+77 MHz: MET
+88 MHz: MET
+94 MHz: MET
+97 MHz: MET
+98 MHz: MET
+99 MHz: MET
+
+No timing violated! Try raising the upper bound (100 MHz)

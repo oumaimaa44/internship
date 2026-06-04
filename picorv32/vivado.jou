@@ -1,0 +1,26 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Thu May 28 15:18:26 2026
+# Process ID         : 1983366
+# Current directory  : /net/users/oelmouden/picorv32
+# Command line       : vivado -mode tcl -notrace -source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/init_script.tcl -source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/analyze_script.tcl -source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/find_fmax.tcl -source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/exit.tcl
+# Log file           : /net/users/oelmouden/picorv32/vivado.log
+# Journal file       : /net/users/oelmouden/picorv32/vivado.jou
+# Running On         : naouna.ims.bordeaux
+# Platform           : RedHatEnterprise
+# Operating System   : Red Hat Enterprise Linux release 8.10 (Ootpa)
+# Processor Detail   : Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz
+# CPU Frequency      : 3100.000 MHz
+# CPU Physical cores : 24
+# CPU Logical cores  : 48
+# Host memory        : 810985 MB
+# Swap memory        : 4294 MB
+# Total Virtual      : 815280 MB
+# Available Virtual  : 803843 MB
+#-----------------------------------------------------------
+source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/init_script.tcl -notrace
+source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/analyze_script.tcl -notrace
+source /net/users/oelmouden/picorv32/work/fmax_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im_fast/scripts/find_fmax.tcl -notrace

@@ -1,0 +1,84 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Thu May 28 13:48:41 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : picorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             2.830ns  (required time - arrival time)
+  Source:                 cpu/instr_fence_reg/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            cpu/pcpi_mul/rd0__0/B[4]
+                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk rise@10.000ns - clk rise@0.000ns)
+  Data Path Delay:        6.727ns  (logic 1.734ns (25.776%)  route 4.993ns (74.224%))
+  Logic Levels:           5  (LUT3=1 LUT4=2 LUT5=1 LUT6=1)
+  Clock Path Skew:        0.043ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.581ns = ( 14.581 - 10.000 ) 
+    Source Clock Delay      (SCD):    4.870ns
+    Clock Pessimism Removal (CPR):    0.331ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_IBUF_BUFG_inst/O
+                         net (fo=924, routed)         1.810     4.870    clk_IBUF_BUFG
+    SLICE_X15Y16         FDRE                                         r  cpu/instr_fence_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X15Y16         FDRE (Prop_fdre_C_Q)         0.456     5.326 r  cpu/instr_fence_reg/Q
+                         net (fo=1, routed)           0.964     6.290    cpu/instr_fence
+    SLICE_X30Y16         LUT4 (Prop_lut4_I0_O)        0.150     6.440 r  rd0__0_i_70/O
+                         net (fo=2, routed)           0.776     7.215    rd0__0_i_70_n_0
+    SLICE_X26Y16         LUT5 (Prop_lut5_I4_O)        0.357     7.572 r  rd0__0_i_66/O
+                         net (fo=1, routed)           0.674     8.247    rd0__0_i_66_n_0
+    SLICE_X26Y16         LUT4 (Prop_lut4_I2_O)        0.327     8.574 r  rd0__0_i_43/O
+                         net (fo=78, routed)          0.964     9.538    rd0__0_i_43_n_0
+    SLICE_X21Y18         LUT3 (Prop_lut3_I2_O)        0.118     9.656 f  rd0_i_22/O
+                         net (fo=5, routed)           0.652    10.308    rd0_i_22_n_0
+    SLICE_X21Y20         LUT6 (Prop_lut6_I3_O)        0.326    10.634 r  rd0_i_15/O
+                         net (fo=3, routed)           0.963    11.597    rd0_i_15_n_0
+    DSP48_X0Y10          DSP48E1                                      r  cpu/pcpi_mul/rd0__0/B[4]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       10.000    10.000 r  
+    N15                                               0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.000    10.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.814    10.814 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.911    12.725    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    12.816 r  clk_IBUF_BUFG_inst/O
+                         net (fo=924, routed)         1.765    14.581    clk_IBUF_BUFG
+    DSP48_X0Y10          DSP48E1                                      r  cpu/pcpi_mul/rd0__0/CLK
+                         clock pessimism              0.331    14.912    
+                         clock uncertainty           -0.035    14.877    
+    DSP48_X0Y10          DSP48E1 (Setup_dsp48e1_CLK_B[4])
+                                                     -0.450    14.427    cpu/pcpi_mul/rd0__0
+  -------------------------------------------------------------------
+                         required time                         14.427    
+                         arrival time                         -11.597    
+  -------------------------------------------------------------------
+                         slack                                  2.830    
+
+
+
+

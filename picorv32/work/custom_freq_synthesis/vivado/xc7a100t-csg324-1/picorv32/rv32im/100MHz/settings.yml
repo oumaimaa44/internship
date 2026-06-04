@@ -1,0 +1,41 @@
+arch_name: picorv32/rv32im
+arch_display_name: picorv32/rv32im @ 100 MHz
+lib_name: LIB_xc7a100t-csg324-1_picorv32_rv32im_100MHz
+target: xc7a100t-csg324-1
+rtl_path: rtl
+script_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im/100MHz/scripts
+report_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im/100MHz/report
+log_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im/100MHz/log
+tmp_path: work/custom_freq_synthesis/vivado/xc7a100t-csg324-1/picorv32/rv32im/100MHz
+design_path: null
+design_path_whitelist: []
+design_path_blacklist: []
+source_rtl_path: rtl
+arch_path: odatix_userconfig/architectures
+clock_signal: clk
+reset_signal: resetn
+top_level_module: picorv32_soc_top
+top_level_file: picorv32_soc_top.v
+use_parameters: true
+start_delimiter: 'module picorv32_soc_top #('
+stop_delimiter: ) (
+file_copy_enable: false
+file_copy_source: /dev/null
+file_copy_dest: /dev/null
+script_copy_enable: false
+script_copy_source: /dev/null
+fmax_lower_bound: None
+fmax_upper_bound: None
+range_list:
+- 100
+- 200
+- 300
+target_frequency: 100
+param_target_filename: rtl/picorv32_soc_top.v
+generate_rtl: false
+generate_command: ''
+constraint_filename: constraints.xdc
+install_path: /net/users/oelmouden/picorv32
+param_domains: {}
+continue_on_error: false
+force_single_thread: false

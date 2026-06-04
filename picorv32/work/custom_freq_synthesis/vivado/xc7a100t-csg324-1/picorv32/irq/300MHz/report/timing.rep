@@ -1,0 +1,99 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Thu May 28 13:54:06 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : picorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -1.706ns  (required time - arrival time)
+  Source:                 cpu/irq_state_reg[1]_replica/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Destination:            cpu/reg_next_pc_reg[26]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.333ns  (clk rise@3.333ns - clk rise@0.000ns)
+  Data Path Delay:        4.929ns  (logic 2.453ns (49.766%)  route 2.476ns (50.234%))
+  Logic Levels:           10  (CARRY4=6 LUT3=1 LUT4=1 LUT5=1 LUT6=1)
+  Clock Path Skew:        -0.106ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.314ns = ( 7.647 - 3.333 ) 
+    Source Clock Delay      (SCD):    4.671ns
+    Clock Pessimism Removal (CPR):    0.251ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_IBUF_BUFG_inst/O
+                         net (fo=1295, routed)        1.611     4.671    clk_IBUF_BUFG
+    SLICE_X55Y69         FDRE                                         r  cpu/irq_state_reg[1]_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X55Y69         FDRE (Prop_fdre_C_Q)         0.456     5.127 r  cpu/irq_state_reg[1]_replica/Q
+                         net (fo=3, routed)           0.635     5.761    cpu/irq_state_reg_n_0_[1]_repN
+    SLICE_X55Y69         LUT4 (Prop_lut4_I0_O)        0.124     5.885 f  reg_pc[31]_i_2/O
+                         net (fo=31, routed)          0.839     6.724    reg_pc[31]_i_2_n_0
+    SLICE_X51Y69         LUT6 (Prop_lut6_I0_O)        0.124     6.848 r  reg_pc[5]_i_1/O
+                         net (fo=3, routed)           0.557     7.405    cpu/current_pc[5]
+    SLICE_X51Y72         LUT5 (Prop_lut5_I4_O)        0.124     7.529 r  reg_next_pc[8]_i_10/O
+                         net (fo=1, routed)           0.000     7.529    reg_next_pc[8]_i_10_n_0
+    SLICE_X51Y72         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     8.061 r  reg_next_pc_reg[8]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.061    reg_next_pc_reg[8]_i_2_n_0
+    SLICE_X51Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.175 r  reg_next_pc_reg[12]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.175    reg_next_pc_reg[12]_i_2_n_0
+    SLICE_X51Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.289 r  reg_next_pc_reg[16]_i_2/CO[3]
+                         net (fo=1, routed)           0.009     8.298    reg_next_pc_reg[16]_i_2_n_0
+    SLICE_X51Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.412 r  reg_next_pc_reg[20]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.412    reg_next_pc_reg[20]_i_2_n_0
+    SLICE_X51Y76         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.526 r  reg_next_pc_reg[24]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     8.526    reg_next_pc_reg[24]_i_2_n_0
+    SLICE_X51Y77         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.860 r  reg_next_pc_reg[28]_i_2/O[1]
+                         net (fo=1, routed)           0.437     9.297    reg_next_pc_reg[28]_i_2_n_6
+    SLICE_X51Y79         LUT3 (Prop_lut3_I0_O)        0.303     9.600 r  reg_next_pc[26]_i_1/O
+                         net (fo=1, routed)           0.000     9.600    reg_next_pc[26]_i_1_n_0
+    SLICE_X51Y79         FDRE                                         r  cpu/reg_next_pc_reg[26]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        3.333     3.333 r  
+    N15                                               0.000     3.333 r  clk (IN)
+                         net (fo=0)                   0.000     3.333    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.814     4.147 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.911     6.058    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.149 r  clk_IBUF_BUFG_inst/O
+                         net (fo=1295, routed)        1.497     7.647    clk_IBUF_BUFG
+    SLICE_X51Y79         FDRE                                         r  cpu/reg_next_pc_reg[26]/C
+                         clock pessimism              0.251     7.898    
+                         clock uncertainty           -0.035     7.862    
+    SLICE_X51Y79         FDRE (Setup_fdre_C_D)        0.031     7.893    cpu/reg_next_pc_reg[26]
+  -------------------------------------------------------------------
+                         required time                          7.893    
+                         arrival time                          -9.600    
+  -------------------------------------------------------------------
+                         slack                                 -1.706    
+
+
+
+

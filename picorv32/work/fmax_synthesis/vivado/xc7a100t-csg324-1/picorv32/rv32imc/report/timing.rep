@@ -1,0 +1,87 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Thu May 28 15:07:37 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : picorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.164ns  (required time - arrival time)
+  Source:                 cpu/latched_branch_reg/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@3.401ns period=6.803ns})
+  Destination:            cpu/decoded_imm_j_reg[15]/S
+                            (rising edge-triggered cell FDSE clocked by clk  {rise@0.000ns fall@3.401ns period=6.803ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            6.803ns  (clk rise@6.803ns - clk rise@0.000ns)
+  Data Path Delay:        6.043ns  (logic 1.324ns (21.909%)  route 4.719ns (78.091%))
+  Logic Levels:           7  (LUT2=1 LUT3=1 LUT4=2 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.036ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.503ns = ( 11.306 - 6.803 ) 
+    Source Clock Delay      (SCD):    4.871ns
+    Clock Pessimism Removal (CPR):    0.331ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_IBUF_BUFG_inst/O
+                         net (fo=1596, routed)        1.811     4.871    clk_IBUF_BUFG
+    SLICE_X23Y14         FDRE                                         r  cpu/latched_branch_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X23Y14         FDRE (Prop_fdre_C_Q)         0.456     5.327 r  cpu/latched_branch_reg/Q
+                         net (fo=101, routed)         0.774     6.101    cpu/latched_branch_reg_n_0
+    SLICE_X19Y14         LUT4 (Prop_lut4_I2_O)        0.124     6.225 r  mem_rdata_q[6]_i_4/O
+                         net (fo=2, routed)           0.567     6.792    mem_rdata_q[6]_i_4_n_0
+    SLICE_X21Y12         LUT6 (Prop_lut6_I3_O)        0.124     6.916 r  mem_rdata_q[6]_i_1/O
+                         net (fo=58, routed)          0.691     7.607    cpu/mem_xfer
+    SLICE_X19Y10         LUT6 (Prop_lut6_I5_O)        0.124     7.731 f  mem_rdata_q[1]_i_2/O
+                         net (fo=5, routed)           0.610     8.341    mem_rdata_q[1]_i_2_n_0
+    SLICE_X17Y10         LUT4 (Prop_lut4_I3_O)        0.124     8.465 r  compressed_instr_i_1/O
+                         net (fo=42, routed)          0.420     8.885    compressed_instr_i_1_n_0
+    SLICE_X17Y11         LUT5 (Prop_lut5_I3_O)        0.124     9.009 r  instr_jal_i_3/O
+                         net (fo=10, routed)          0.400     9.408    cpu/mem_done
+    SLICE_X16Y11         LUT2 (Prop_lut2_I1_O)        0.124     9.532 r  instr_jal_i_1/O
+                         net (fo=56, routed)          0.729    10.261    cpu/instr_lui0
+    SLICE_X14Y10         LUT3 (Prop_lut3_I2_O)        0.124    10.385 r  decoded_imm_j[19]_i_1/O
+                         net (fo=2, routed)           0.529    10.914    decoded_imm_j[19]_i_1_n_0
+    SLICE_X14Y10         FDSE                                         r  cpu/decoded_imm_j_reg[15]/S
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        6.803     6.803 r  
+    N15                                               0.000     6.803 r  clk (IN)
+                         net (fo=0)                   0.000     6.803    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.814     7.617 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.911     9.528    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     9.619 r  clk_IBUF_BUFG_inst/O
+                         net (fo=1596, routed)        1.687    11.306    clk_IBUF_BUFG
+    SLICE_X14Y10         FDSE                                         r  cpu/decoded_imm_j_reg[15]/C
+                         clock pessimism              0.331    11.638    
+                         clock uncertainty           -0.035    11.602    
+    SLICE_X14Y10         FDSE (Setup_fdse_C_S)       -0.524    11.078    cpu/decoded_imm_j_reg[15]
+  -------------------------------------------------------------------
+                         required time                         11.078    
+                         arrival time                         -10.914    
+  -------------------------------------------------------------------
+                         slack                                  0.164    
+
+
+
+

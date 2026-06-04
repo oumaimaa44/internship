@@ -1,0 +1,93 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Thu May 28 14:45:42 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_timing
+| Design       : picorv32_soc_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -1.311ns  (required time - arrival time)
+  Source:                 cpu/reg_op1_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Destination:            cpu/alu_out_q_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.333ns  (clk rise@3.333ns - clk rise@0.000ns)
+  Data Path Delay:        4.355ns  (logic 1.820ns (41.791%)  route 2.535ns (58.209%))
+  Logic Levels:           8  (CARRY4=4 LUT4=2 LUT6=2)
+  Clock Path Skew:        -0.285ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.332ns = ( 7.665 - 3.333 ) 
+    Source Clock Delay      (SCD):    4.868ns
+    Clock Pessimism Removal (CPR):    0.251ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    N15                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.948     0.948 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.016     2.963    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     3.059 r  clk_IBUF_BUFG_inst/O
+                         net (fo=1260, routed)        1.808     4.868    clk_IBUF_BUFG
+    SLICE_X43Y46         FDRE                                         r  cpu/reg_op1_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y46         FDRE (Prop_fdre_C_Q)         0.456     5.324 f  cpu/reg_op1_reg[0]/Q
+                         net (fo=26, routed)          0.707     6.031    cpu/reg_op1_reg_n_0_[0]
+    SLICE_X43Y47         LUT4 (Prop_lut4_I3_O)        0.124     6.155 r  decoder_trigger_i_85/O
+                         net (fo=1, routed)           0.344     6.499    decoder_trigger_i_85_n_0
+    SLICE_X40Y47         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.526     7.025 r  decoder_trigger_reg_i_65/CO[3]
+                         net (fo=1, routed)           0.000     7.025    decoder_trigger_reg_i_65_n_0
+    SLICE_X40Y48         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.139 r  decoder_trigger_reg_i_47/CO[3]
+                         net (fo=1, routed)           0.000     7.139    decoder_trigger_reg_i_47_n_0
+    SLICE_X40Y49         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.253 r  decoder_trigger_reg_i_25/CO[3]
+                         net (fo=1, routed)           0.001     7.254    decoder_trigger_reg_i_25_n_0
+    SLICE_X40Y50         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.368 r  decoder_trigger_reg_i_10/CO[3]
+                         net (fo=1, routed)           0.754     8.121    cpu/alu_ltu
+    SLICE_X40Y51         LUT6 (Prop_lut6_I4_O)        0.124     8.245 f  decoder_trigger_i_4/O
+                         net (fo=3, routed)           0.411     8.656    decoder_trigger_i_4_n_0
+    SLICE_X39Y51         LUT4 (Prop_lut4_I0_O)        0.124     8.780 f  alu_out_q[0]_i_3/O
+                         net (fo=3, routed)           0.318     9.099    alu_out_q[0]_i_3_n_0
+    SLICE_X39Y53         LUT6 (Prop_lut6_I5_O)        0.124     9.223 r  alu_out_q[0]_i_1/O
+                         net (fo=1, routed)           0.000     9.223    alu_out_q[0]_i_1_n_0
+    SLICE_X39Y53         FDRE                                         r  cpu/alu_out_q_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        3.333     3.333 r  
+    N15                                               0.000     3.333 r  clk (IN)
+                         net (fo=0)                   0.000     3.333    clk
+    N15                  IBUF (Prop_ibuf_I_O)         0.814     4.147 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           1.911     6.058    clk_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     6.149 r  clk_IBUF_BUFG_inst/O
+                         net (fo=1260, routed)        1.515     7.665    clk_IBUF_BUFG
+    SLICE_X39Y53         FDRE                                         r  cpu/alu_out_q_reg[0]/C
+                         clock pessimism              0.251     7.916    
+                         clock uncertainty           -0.035     7.880    
+    SLICE_X39Y53         FDRE (Setup_fdre_C_D)        0.031     7.911    cpu/alu_out_q_reg[0]
+  -------------------------------------------------------------------
+                         required time                          7.911    
+                         arrival time                          -9.223    
+  -------------------------------------------------------------------
+                         slack                                 -1.311    
+
+
+
+
