@@ -20,7 +20,7 @@
 #
 
 .PHONY : all
-all: my_asterisc_program coremark_program
+all: my_asterisc_program coremark
 
 .PHONY: libs_asterisc
 libs_asterisc:
@@ -30,6 +30,6 @@ libs_asterisc:
 my_asterisc_program: libs_asterisc
 	@+$(MAKE) -C $@ --no-print-directory
 
-.PHONY: coremark_program
-coremark_program: libs_asterisc
+.PHONY: coremark
+coremark: libs_asterisc
 	@+$(MAKE) -C $@ --no-print-directory

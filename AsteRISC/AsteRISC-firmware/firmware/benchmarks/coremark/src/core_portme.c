@@ -15,6 +15,11 @@ Original Author: Shay Gal-on
 #include <stdio.h>
 #include <stdlib.h>
 #include "coremark.h"
+#include <gpio.h>
+#include <uart.h>
+
+/* Define clock_t for CoreMark */
+typedef long clock_t;
 
 #if VALIDATION_RUN
 volatile ee_s32 seed1_volatile = 0x3415;
@@ -130,6 +135,12 @@ ee_u32 default_num_contexts = 1;
 void
 portable_init(core_portable *p, int *argc, char *argv[])
 {
+    /* Initialize UART for output */
+    pinMode(19, HARDWARE_FUNCTION);  /* UART TX */
+    pinMode(18, HARDWARE_FUNCTION);  /* UART RX */
+    uart0_config_bits->baudrate = 21;  /* 40MHz / 115200 / 16 ≈ 21 */
+    uart0_config_bits->tx_en = 1;
+    
     if (sizeof(ee_ptr_int) != sizeof(ee_u8 *))
     {
         ee_printf(

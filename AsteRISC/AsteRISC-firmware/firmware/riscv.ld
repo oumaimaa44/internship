@@ -66,5 +66,18 @@ SECTIONS
     *(.rodata .rodata.* .gnu.linkonce.r.*) 
     *(.rodata1)
   }
+  .bss (NOLOAD) :
+  {
+    __bss_start = .;
+    *(.sbss .sbss.* .gnu.linkonce.sb.*)
+    *(.bss .bss.* .gnu.linkonce.b.*)
+    *(COMMON)
+    __bss_end = .;
+  }
+  _end = .;
+  PROVIDE(end = .);
+
+
   /*/DISCARD/ : { *(.comment) *(.riscv.attributes) }*/
 }
+

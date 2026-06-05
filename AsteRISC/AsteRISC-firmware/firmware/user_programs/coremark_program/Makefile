@@ -19,7 +19,7 @@
 # along with AsteRISC. If not, see <https://www.gnu.org/licenses/>.
 #
 
-TARGET = coremark_program
+TARGET = coremark
 MARCH  = -march=rv32im_zicsr -mabi=ilp32
 LIBS   = -lasterisc -ldebug -lgpio -luart -luart_extensions -lspi_slave -l7seg -lgcc
 MAKEFILE = ../../generic_makefile.mk

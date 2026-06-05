@@ -42,8 +42,8 @@ INCLUDE_ALL_SCRIPT  = $(WORK_DIR)/include_all.py
 
 #RV_TEST_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Tests_RV32I/tests_imem.hex
 #RV_TEST_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Tests_RV32I/tests_dmem.hex
-COREMARK_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/coremark_program/bin/coremark_program_imem.hex
-COREMARK_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/coremark_program/bin/coremark_program_dmem.hex
+COREMARK_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/coremark/bin/coremark_imem.hex
+COREMARK_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/coremark/bin/coremark_dmem.hex
 #CORE_M_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32M/coremark_benchmark_imem.hex
 #CORE_M_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32M/coremark_benchmark_dmem.hex
 #COREMARK_IMEM_FILE  = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32I/coremark_benchmark_imem.hex

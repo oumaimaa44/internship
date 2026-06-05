@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/* Modified for the NEORV32 Processor - by Stephan Nolting */
+/* Modified for the PicoRV32 Processor - by Stephan Nolting */
 
 #include <coremark.h>
 #include <stdarg.h>
