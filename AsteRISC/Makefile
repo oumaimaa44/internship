@@ -24,6 +24,7 @@
 ########################################################
 
 DHRYSTONE_WORK          = work/simulations
+COREMARK_WORK           = work/simulations
 
 ########################################################
 # Files
@@ -31,6 +32,7 @@ DHRYSTONE_WORK          = work/simulations
 
 VENV_ACTIVATE_SCRIPT    = activate.sh
 DHRYSTONE_SETTINGS      = odatix_userconfig/simulations/_run_dhrystone_settings.yml
+COREMARK_SETTINGS       = odatix_userconfig/simulations/_run_coremark_settings.yml
 USER_PROGRAM_SETTINGS   = odatix_userconfig/simulations/_run_user_program_settings.yml
 
 ########################################################
@@ -108,11 +110,11 @@ benchmarks: motd benchmarks_only results_benchmarks
 
 .PHONY: benchmarks_only
 benchmarks_only:
-	@/bin/bash -c '$(VENV_ACTIVATE); odatix sim -i $(DHRYSTONE_SETTINGS) --nobanner'
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix sim -i $(COREMARK_SETTINGS) --nobanner'
 
 .PHONY: results_benchmarks
 results_benchmarks:
-	@/bin/bash -c '$(VENV_ACTIVATE); odatix res_benchmark --work $(DHRYSTONE_WORK) --nobanner'
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix res_benchmark --work $(COREMARK_WORK) --nobanner'
 
 ########################################################
 # Vivado

@@ -1,2 +1,2 @@
 
-USER_PROGRAM = dhrystone
+USER_PROGRAM = coremark_program

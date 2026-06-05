@@ -4,7 +4,7 @@
 ###################################################
 
 # RISC-V toolchain install path
-RISCV_DIR=/opt/riscv32
+RISCV_DIR=/opt/riscv
 
 # Target triple <machine>-<vendor>-<os>
 RISCV_TT=riscv32-unknown-elf
