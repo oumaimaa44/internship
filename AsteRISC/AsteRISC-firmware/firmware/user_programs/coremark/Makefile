@@ -20,7 +20,7 @@
 #
 
 TARGET = coremark
-MARCH  = -march=rv32im_zicsr -mabi=ilp32
+MARCH  = -march=rv32im -mabi=ilp32
 LIBS   = -lasterisc -ldebug -lgpio -luart -luart_extensions -lspi_slave -l7seg -lgcc
 MAKEFILE = ../../generic_makefile.mk
 

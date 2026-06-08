@@ -108,6 +108,7 @@ char *mem_name[3] = { "Static", "Heap", "Stack" };
 MAIN_RETURN_TYPE
 _entry(void)
 {
+    ee_printf("ENTER core_main\n");
     int   argc = 0;
     char *argv[1];
 #else
@@ -125,12 +126,15 @@ _entry(int argc, char *argv[])
 #endif
     /* first call any initializations needed */
     portable_init(&(results[0].port), &argc, argv);
+    ee_printf("AFTER portable_init\n");
     /* First some checks to make sure benchmark will run ok */
     if (sizeof(struct list_head_s) > 128)
     {
         ee_printf("list_head structure too big for comparable data!\n");
         return MAIN_RETURN_VAL;
     }
+
+    ee_printf("CHECK 1 before get_seed\n");
     results[0].seed1      = get_seed(1);
     results[0].seed2      = get_seed(2);
     results[0].seed3      = get_seed(3);
@@ -139,6 +143,8 @@ _entry(int argc, char *argv[])
     results[0].iterations = 1;
 #endif
     results[0].execs = get_seed_32(5);
+    ee_printf("CHECK 2 after get_seed\n");
+
     if (results[0].execs == 0)
     { /* if not supplied, execute all algorithms */
         results[0].execs = ALL_ALGORITHMS_MASK;
@@ -158,6 +164,7 @@ _entry(int argc, char *argv[])
         results[0].seed2 = 0x3415;
         results[0].seed3 = 0x66;
     }
+    ee_printf("CHECK 3 before memory init\n");
 #if (MEM_METHOD == MEM_STATIC)
     results[0].memblock[0] = (void *)static_memblk;
     results[0].size        = TOTAL_DATA_SIZE;
@@ -165,6 +172,7 @@ _entry(int argc, char *argv[])
 #if (MULTITHREAD > 1)
 #error "Cannot use a static data area with multiple contexts!"
 #endif
+
 #elif (MEM_METHOD == MEM_MALLOC)
     for (i = 0; i < MULTITHREAD; i++)
     {
@@ -180,6 +188,7 @@ _entry(int argc, char *argv[])
         results[i].err         = 0;
         results[i].execs       = results[0].execs;
     }
+
 #elif (MEM_METHOD == MEM_STACK)
 for (i = 0; i < MULTITHREAD; i++)
 {
@@ -196,6 +205,7 @@ for (i = 0; i < MULTITHREAD; i++)
 #endif
     /* Data init */
     /* Find out how space much we have based on number of algorithms */
+    ee_printf("CHECK 4 before algorithm initialization\n");
     for (i = 0; i < NUM_ALGORITHMS; i++)
     {
         if ((1 << (ee_u32)i) & results[0].execs)
@@ -216,28 +226,38 @@ for (i = 0; i < MULTITHREAD; i++)
         }
     }
     /* call inits */
+    ee_printf("TEST x=%04x\n", 0x1234);
+    ee_printf("TEST lu=%lu\n", 123456UL);
+    ee_printf("CHECK 5 before algorithm initialization\n");
     for (i = 0; i < MULTITHREAD; i++)
     {
         if (results[i].execs & ID_LIST)
         {
+            ee_printf("BEFORE core_list_init\n");
             results[i].list = core_list_init(
                 results[0].size, results[i].memblock[1], results[i].seed1);
+            ee_printf("AFTER core_list_init\n");
         }
         if (results[i].execs & ID_MATRIX)
         {
+                ee_printf("BEFORE core_init_matrix\n");
             core_init_matrix(results[0].size,
                              results[i].memblock[2],
                              (ee_s32)results[i].seed1
                                  | (((ee_s32)results[i].seed2) << 16),
                              &(results[i].mat));
+                ee_printf("AFTER core_init_matrix\n");
         }
         if (results[i].execs & ID_STATE)
         {
+            ee_printf("BEFORE core_init_state\n");
             core_init_state(
                 results[0].size, results[i].seed1, results[i].memblock[3]);
+            ee_printf("AFTER core_init_state\n");
         }
     }
-
+    ee_printf("CHECK 6 after algorithm initialization\n");
+    for (i = 0; i < MULTITHREAD; i++)
     /* automatically determine number of iterations if not set */
     if (results[0].iterations == 0)
     {
@@ -247,9 +267,13 @@ for (i = 0; i < MULTITHREAD; i++)
         while (secs_passed < (secs_ret)1)
         {
             results[0].iterations *= 10;
+            ee_printf("BEFORE start_time\n");
             start_time();
+            ee_printf("BEFORE iterate\n");
             iterate(&results[0]);
+            ee_printf("AFTER iterate\n");
             stop_time();
+            ee_printf("AFTER stop_time\n");
             secs_passed = time_in_secs(get_time());
         }
         /* now we know it executes for at least 1 sec, set actual run time at
@@ -261,8 +285,10 @@ for (i = 0; i < MULTITHREAD; i++)
             divisor = 1;
         results[0].iterations *= 1 + 10 / divisor;
     }
+    ee_printf("CHECK 7 before Hello\n");
     ee_printf("Hello! Coremark starting for %lu iteration%s...\n", results[0].iterations, results[0].iterations == 1 ? "" : "s");
     /* perform actual benchmark */
+    ee_printf("CHECK 8 after Hello\n");
     start_time();
 #if (MULTITHREAD > 1)
     if (default_num_contexts > MULTITHREAD)

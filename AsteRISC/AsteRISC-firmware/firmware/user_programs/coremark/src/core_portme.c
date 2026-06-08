@@ -100,7 +100,12 @@ secs_ret time_in_secs(CORE_TICKS ticks)
  * Test for some common mistakes.
  */
 void portable_init(core_portable *p, int *argc, char *argv[]) {
+  ee_printf("ENTER portable_init\n");
+  ee_printf("A\n");
+  ee_printf("TEST d=%d\n", 123);
+  ee_printf("B\n");
 
+  //asm volatile ("ebreak");
   (void)argc;
   (void)argv;
   ee_printf("Compiling for %d Hz, This can take a while : \n", CLOCK_HZ);
@@ -116,7 +121,7 @@ void portable_fini(core_portable *p) {
   CORE_TICKS cycles = stop_cycle - start_cycle;
   CORE_TICKS instr  = stop_instret - start_instret;
 
-  ee_printf("\nPicoRV32 Hardware Counters\n");
+  ee_printf("\nAsteRISC Hardware Counters\n");
   ee_printf(" > Active clock cycles  : %u\n", (unsigned int)cycles);
   ee_printf(" > Retired instructions : %u\n", (unsigned int)instr);
 
@@ -128,6 +133,8 @@ void portable_fini(core_portable *p) {
   }
 
     p->portable_id = 0;
+    ee_printf("\nCoreMark finished\n");
+    asm volatile ("ebreak");
 
 }
 

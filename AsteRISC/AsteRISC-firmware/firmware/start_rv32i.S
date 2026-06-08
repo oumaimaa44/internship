@@ -57,7 +57,7 @@ _start:
   addi x29, zero, 0
   addi x30, zero, 0
   addi x31, zero, 0
-  lui  a1, 0x10001
-  addi sp, a1, -4
+  lui  a1, 0x10008
+  addi sp, a1, 0
   jal  ra, _entry
 	ebreak

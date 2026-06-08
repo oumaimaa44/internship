@@ -95,7 +95,7 @@ motd:
 
 .PHONY: clean
 clean: 
-	@$/bin/bash -c '$(VENV_ACTIVATE); odatix clean --nobanner'
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix clean --nobanner'
 
 ########################################################
 # Simulation
@@ -184,4 +184,4 @@ results: results_benchmarks results_vivado
 
 .PHONY: explore
 explore:
-	@/bin/bash -c '$(VENV_ACTIVATE); odatix-explorer'
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix-explorer $(COREMARK_SETTINGS)'

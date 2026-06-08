@@ -29,8 +29,8 @@ li	t3,0
 li	t4,0
 li	t5,0
 li	t6,0
-lui	a1,0x10001
-addi	sp,a1,-4
+lui	a1,0x10008
+mv	sp,a1
 jal	f000008c
 ebreak
 addi	sp,sp,-16

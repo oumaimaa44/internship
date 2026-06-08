@@ -27,6 +27,6 @@ simulations:
 #--------------------------------------------#
 
   - coremark:
-    - AsteRISC/* + MEM/1024I_1024D + Baseline/I + Mul/Off
+    - AsteRISC/M0000 + MEM/4096I_1024D + Baseline/I + Mul/Off
 
 ...

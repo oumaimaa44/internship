@@ -24,8 +24,8 @@
 ########################################################
 TARGET     = my_example
 LIBS       = -lasterisc
-AFLAGS     = -march=rv32i -mabi=ilp32
-MARCH  	   = -march=rv32i -mabi=ilp32
+AFLAGS     = -march=rv32im -mabi=ilp32
+MARCH  	   = -march=rv32im -mabi=ilp32
 CFLAGS     = -Wall -O2 -pedantic $(MARCH) -MMD -MP #-fno-exceptions -fno-asynchronous-unwind-tables -fno-ident
 RV32E      = 0
 
