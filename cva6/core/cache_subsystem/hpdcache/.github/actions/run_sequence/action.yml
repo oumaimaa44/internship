@@ -1,0 +1,90 @@
+##
+#  Copyright 2025 Inria
+#  SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+##
+##
+#  Author     : Cesar Fuguet
+#  Date       : October, 2024
+#  Description: GitHub Action to run a given test sequence on the Verilator TB
+##
+name: 'Run sequence'
+inputs:
+  seqname:
+    description: 'Name of the test sequence'
+    required: true
+
+  ntrans:
+    description: 'Number of transactions in the sequence'
+    required: true
+
+  filename:
+    description: 'Trace file to read the sequence'
+    required: false
+    default: 'traces_lib/trace_qemu'
+
+  ntests:
+    description: 'Number of separate tests'
+    required: true
+
+  inject_single_faults:
+    description: 'Inject single faults'
+    default: '1'
+    required: false
+
+  inject_double_faults:
+    description: 'Inject double faults'
+    default: '0'
+    required: false
+
+  config:
+    description: 'File with DUT parameters'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    #  Install Dependencies
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        ./.github/scripts/install_deps_ubuntu.sh
+
+    - name: Cache SystemC
+      id: cache-systemc
+      uses: actions/cache@v4
+      with:
+        path: build/systemc-3.0.1
+        fail-on-cache-miss: true
+        key: ${{ runner.os }}-build-systemc-${{ hashFiles('.github/scripts/install_systemc.sh') }}
+
+    - name: Cache Verilator
+      id: cache-verilator
+      uses: actions/cache@v4
+      with:
+        path: build/verilator-v5.028
+        fail-on-cache-miss: true
+        key: ${{ runner.os }}-build-verilator-${{ hashFiles('.github/scripts/install_verilator.sh') }}
+
+    #  Run the test sequence
+    - name: Run the random test sequence (short)
+      id: run-tb
+      shell: bash
+      run: |
+        . .github/scripts/env.sh
+        cd rtl/tb
+        make nonregression \
+            CONFIG=${{ inputs.config }} \
+            SEQUENCE=${{ inputs.seqname }} \
+            NTESTS=${{ inputs.ntests }} \
+            NTRANSACTIONS=${{ inputs.ntrans }} \
+            TRACE_SEQ_FILE=${{ inputs.filename }} \
+            CONF_HPDCACHE_TEST_FAULT_INJ=${{ inputs.inject_single_faults }} \
+            CONF_HPDCACHE_TEST_FAULT_INJ_DIR=1 \
+            CONF_HPDCACHE_TEST_DOUBLE_FAULT_INJ=${{ inputs.inject_double_faults }}
+
+    - name: Archive nonregression logs
+      if: ${{ failure () && steps.run-tb.conclusion == 'failure' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: run-${{ inputs.seqname }}_${{ inputs.ntrans }}_${{ inputs.ntests }}-log
+        path: rtl/tb/logs

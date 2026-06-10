@@ -1,0 +1,61 @@
+# GitHub Action to run Verible linting on pull requests
+# See https://github.com/chipsalliance/verible-linter-action
+
+name: verible-lint HPDcache source code
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'CODEOWNERS'
+      - 'LICENSE'
+
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'CODEOWNERS'
+      - 'LICENSE'
+
+jobs:
+  lint-verilog:
+    name: lint-verilog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: chipsalliance/verible-linter-action@main
+        with:
+          config_file: ./rtl/lint/verible_rules.cfg
+          paths: |
+            ./rtl/include
+            ./rtl/src
+          extensions: |
+            .sv
+            .svh
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reviewdog_reporter: 'github-pr-check'
+          verible_version: "v0.0-3684-g23cda0c4"
+          suggest_fixes: 'false'
+          extra_args: |
+            --waiver_files=rtl/lint/verible.waiver
+            --check_syntax=true
+
+  lint-cpp:
+    name: lint-cpp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      # Install Dependencies
+      - name: Install dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format-15
+
+      # Check C++ code formatting
+      - name: Check C++ code formatting
+        shell: bash
+        run: |
+          echo "Checking C++ code style"
+          bash .github/scripts/check_cpp_style.sh

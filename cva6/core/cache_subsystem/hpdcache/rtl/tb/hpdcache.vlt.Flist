@@ -1,0 +1,38 @@
+##
+#  Copyright 2023,2024 Commissariat a l'Energie Atomique et aux Energies Alternatives (CEA)
+#  Copyright 2025 Univ. Grenoble Alpes, Inria, TIMA Laboratory
+#
+#  SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+##
+##
+#  Author     : Cesar Fuguet
+#  Date       : October, 2024
+#  Description: HPDCACHE Testbench Filelist
+##
+#  list of HPDcache files
++incdir+${HPDCACHE_DIR}/rtl/src/utils/ecc
+-F ${HPDCACHE_DIR}/rtl/hpdcache.Flist
+
+#  ECC modules
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_pkg.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_36_29_dec.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_36_29_enc.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_39_32_dec.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_39_32_enc.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_55_48_dec.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_55_48_enc.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_72_64_dec.sv
+${HPDCACHE_DIR}/rtl/src/utils/ecc/prim_secded_72_64_enc.sv
+
+#  RAM macros
+${HPDCACHE_DIR}/rtl/src/common/macros/behav/hpdcache_sram_1rw.sv
+${HPDCACHE_DIR}/rtl/src/common/macros/behav/hpdcache_sram_ecc_1rw.sv
+${HPDCACHE_DIR}/rtl/src/common/macros/behav/hpdcache_sram_wbyteenable_1rw.sv
+${HPDCACHE_DIR}/rtl/src/common/macros/behav/hpdcache_sram_wbyteenable_ecc_1rw.sv
+${HPDCACHE_DIR}/rtl/src/common/macros/behav/hpdcache_sram_wmask_1rw.sv
+${HPDCACHE_DIR}/rtl/src/common/macros/behav/hpdcache_sram_wmask_ecc_1rw.sv
+
+#  Simulation wrapper for Verilator
+hpdcache_wrapper.sv
+
+# vim: ts=4 : sts=4 : sw=4 : et : spell : spelllang=en

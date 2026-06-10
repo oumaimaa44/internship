@@ -1,0 +1,6 @@
+#!/net/users/oelmouden/cva6/.venv-riscvdv/bin/python
+import sys
+from rst2pdf.createpdf import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())
