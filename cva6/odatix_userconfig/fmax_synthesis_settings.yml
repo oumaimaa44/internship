@@ -29,7 +29,10 @@ architectures:
   #- Your_Design/Your_1st_Configuration
   #- Your_Design/Your_2nd_Configuration
   #- Your_Design/Your_3rd_Configuration
-
+  - CVA6/base
+  - CVA6/cvxif
+  #- CVA6/no_debug
+  - CVA6/no_fpu
   # or 
   
   # - Your_Design/*
