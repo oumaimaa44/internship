@@ -16,28 +16,30 @@ module cva6_soc_wrapper
 
    
   parameter int unsigned GPIO_WIDTH_P = 32,
-//start
+  //start
   parameter int unsigned DEBUG_EN_P = 1,
 
   parameter int unsigned PERF_COUNTER_EN_P = 1,
 
   parameter int unsigned MMU_PRESENT_P = 1,
 
-  parameter int unsigned PMP_ENTRIES_P = 16,
-
+  parameter int unsigned PMP_ENTRIES_P = 4,
+  
+  parameter int unsigned RVA_P = 1,
+  
   parameter int unsigned RVC_P = 1,
 
-  parameter int unsigned RVF_P = 1,
+  parameter int unsigned RVF_P = 0,
 
-  parameter int unsigned RVD_P = 1,
+  parameter int unsigned RVD_P = 0,
 
   parameter int unsigned CVXIF_EN_P = 0,
 
   parameter int unsigned COPRO_TYPE_P = 0,
 
-  parameter int unsigned ICACHE_BYTE_SIZE_P = 16384,
+  parameter int unsigned ICACHE_BYTE_SIZE_P = 4096,
 
-  parameter int unsigned DCACHE_BYTE_SIZE_P = 32768,
+  parameter int unsigned DCACHE_BYTE_SIZE_P = 4096,
 
   parameter int unsigned D_CACHE_TYPE_P = 0,
   //end
@@ -52,7 +54,8 @@ module cva6_soc_wrapper
     `CVA6_KEEP(XLEN),
     `CVA6_KEEP(VLEN),
 
-    `CVA6_KEEP(RVA),
+    //`CVA6_KEEP(RVA), //decomment if you want to use a 64bit config
+    RVA: RVA_P != 0, //comment if you want to use a 64bit config
     `CVA6_KEEP(RVB),
     `CVA6_KEEP(ZKN),
     `CVA6_KEEP(RVV),
@@ -370,8 +373,7 @@ module cva6_soc_wrapper
   // CVA6 core
   // ============================================================
 
-  (* DONT_TOUCH = "yes", KEEP_HIERARCHY = "yes" *)
-  cva6 #(
+    cva6 #(
     .CVA6Cfg              (CVA6Cfg),
 
     .rvfi_probes_instr_t  (rvfi_probes_instr_t),
@@ -490,8 +492,7 @@ module cva6_soc_wrapper
   //   offset 0x04: gpio_i register, read-only
   // ============================================================
 
-  (* DONT_TOUCH = "yes", KEEP_HIERARCHY = "yes" *)
-  ariane_simple_axi_gpio #(
+    ariane_simple_axi_gpio #(
     .GPIO_WIDTH     (GPIO_WIDTH_P),
     .AXI_DATA_WIDTH (CVA6Cfg.AxiDataWidth),
 
