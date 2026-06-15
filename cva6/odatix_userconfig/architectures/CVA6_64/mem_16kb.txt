@@ -1,0 +1,18 @@
+
+  parameter int unsigned DEBUG_EN_P = 0,
+  parameter int unsigned PERF_COUNTER_EN_P = 0,
+
+  parameter int unsigned MMU_PRESENT_P = 0,
+  parameter int unsigned PMP_ENTRIES_P = 0,
+
+  parameter int unsigned RVA_P = 0,
+  parameter int unsigned RVC_P = 0,
+  parameter int unsigned RVF_P = 0,
+  parameter int unsigned RVD_P = 0,
+
+  parameter int unsigned CVXIF_EN_P = 0,
+  parameter int unsigned COPRO_TYPE_P = 0,
+
+  parameter int unsigned ICACHE_BYTE_SIZE_P = 16384,
+  parameter int unsigned DCACHE_BYTE_SIZE_P = 16384,
+  parameter int unsigned D_CACHE_TYPE_P = 0,

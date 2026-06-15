@@ -1,0 +1,28 @@
+---
+rtl_path: "core"
+
+top_level_file: "cva6_soc_wrapper.sv"
+top_level_module: "cva6_soc_wrapper"
+rtl_file_format: ".sv"
+
+clock_signal: "clk_i"
+reset_signal: "rstn_i"
+
+file_copy_enable: No
+file_copy_source: "/dev/null"
+file_copy_dest: "/dev/null"
+
+param_target_file: rtl/cva6_soc_wrapper.sv
+use_parameters: Yes
+start_delimiter: "//start"
+stop_delimiter: "//end"
+
+xc7a100t-csg324-1:
+   fmax_synthesis:
+      lower_bound: 5
+      upper_bound: 75
+   custom_freq_synthsis:
+      lower_bound: 50
+      upper_bound: 200
+      step: 20
+...

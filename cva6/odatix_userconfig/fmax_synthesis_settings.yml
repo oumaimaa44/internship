@@ -17,7 +17,7 @@ exit_when_done:   No   # overridden by -E / --exit
 log_size_limit:   300  # overridden by --logsize
 
 # maximum number of parallel jobs
-nb_jobs:          12    # overridden by -j / --jobs
+nb_jobs:          35    # overridden by -j / --jobs
 
 # targeted architectures
 architectures: 
@@ -29,10 +29,8 @@ architectures:
   #- Your_Design/Your_1st_Configuration
   #- Your_Design/Your_2nd_Configuration
   #- Your_Design/Your_3rd_Configuration
-  - CVA6/base
-  - CVA6/cvxif
-  #- CVA6/no_debug
-  - CVA6/no_fpu
+  #- CVA6_32/*
+  - CVA6_64/*
   # or 
   
   # - Your_Design/*
