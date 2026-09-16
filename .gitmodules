@@ -1,0 +1,6 @@
+[submodule "aubrac"]
+	path = aubrac
+	url = https://gitlab.bordeaux-inp.fr/herd-ware/hw-aubrac.git
+[submodule "cv32e40p"]
+	path = cv32e40p
+	url = https://github.com/openhwgroup/cv32e40p
