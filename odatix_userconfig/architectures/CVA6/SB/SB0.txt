@@ -1,0 +1,2 @@
+
+parameter CVA6ConfigNrScoreboardEntries = 0,

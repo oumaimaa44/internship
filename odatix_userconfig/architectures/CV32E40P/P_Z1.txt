@@ -1,0 +1,8 @@
+
+  parameter COREV_PULP = 1,
+  parameter COREV_CLUSTER = 0,
+  parameter FPU = 1,
+  parameter FPU_ADDMUL_LAT = 1,
+  parameter FPU_OTHERS_LAT = 1,
+  parameter ZFINX = 1,
+  parameter NUM_MHPMCOUNTERS = 1

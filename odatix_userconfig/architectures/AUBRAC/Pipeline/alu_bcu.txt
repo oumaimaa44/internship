@@ -1,0 +1,6 @@
+
+parameter ID_STAGE_USE = 1,
+parameter EX_STAGE_USE = 1,
+parameter ALU_REG_USE  = 1,
+parameter BCU_REG_USE  = 1,
+parameter MA_STAGE_USE = 1

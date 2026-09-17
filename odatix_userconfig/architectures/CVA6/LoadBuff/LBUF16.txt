@@ -1,0 +1,3 @@
+
+
+parameter CVA6ConfigNrLoadBufEntries = 4,

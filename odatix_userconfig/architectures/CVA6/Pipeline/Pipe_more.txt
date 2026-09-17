@@ -1,0 +1,3 @@
+
+parameter CVA6ConfigNrLoadPipeRegs  = 1,
+parameter CVA6ConfigNrStorePipeRegs = 1,

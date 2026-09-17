@@ -1,0 +1,2 @@
+
+parameter COMPRESSED_ISA = 1'b1,

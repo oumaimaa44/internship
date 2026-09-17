@@ -1,0 +1,3 @@
+
+parameter p_alu_share_adder = 0,
+parameter p_alu_shift_bits  = 32,

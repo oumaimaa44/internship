@@ -1,0 +1,4 @@
+
+parameter CVA6ConfigRASDepth  = 0,
+parameter CVA6ConfigBTBEntries = 16,
+parameter CVA6ConfigBHTEntries = 64,

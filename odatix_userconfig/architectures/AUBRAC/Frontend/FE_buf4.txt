@@ -1,0 +1,3 @@
+
+parameter IF1_STAGE_USE = 0,
+parameter FETCH_BUFFER_N = 4,

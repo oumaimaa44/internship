@@ -1,0 +1,3 @@
+
+parameter ENABLE_REGS_16_31    = 1'b1,
+parameter ENABLE_REGS_DUALPORT = 1'b1,

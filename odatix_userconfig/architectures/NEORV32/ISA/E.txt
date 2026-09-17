@@ -1,0 +1,6 @@
+
+RISCV_ISA_C         : boolean := false;
+RISCV_ISA_E         : boolean := true;
+RISCV_ISA_M         : boolean := false;
+RISCV_ISA_U         : boolean := false;
+RISCV_ISA_Zmmul     : boolean := false;

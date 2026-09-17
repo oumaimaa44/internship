@@ -1,0 +1,32 @@
+###########################################
+# Parameter Domain - ALU                 #
+###########################################
+
+start_delimiter: "  // <alu>"
+stop_delimiter: "  // </alu>"
+
+generate_configurations: Yes
+
+generate_configurations_settings:
+  name: "Sh${shift_bits}_SA${p_alu_share_adder}"
+
+  template: |
+
+    parameter p_alu_share_adder = ${p_alu_share_adder},
+    parameter p_alu_shift_bits  = ${shift_bits},
+
+  variables:
+    p_alu_share_adder:
+      type: list
+      settings:
+        list:
+          - 0
+          - 1
+
+    shift_bits:
+      type: list
+      settings:
+        list:
+          - 1
+          - 8
+          - 32

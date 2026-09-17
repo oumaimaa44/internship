@@ -1,0 +1,18 @@
+
+  parameter BOOT_ADDR = 32'h00000000,
+  parameter CVA6ConfigCExtEn = 1,
+  parameter CVA6ConfigIcacheByteSize = 256,
+  parameter CVA6ConfigIcacheSetAssoc = 1,
+  parameter CVA6ConfigIcacheLineWidth = 128,
+  parameter CVA6ConfigDcacheByteSize = 512,
+  parameter CVA6ConfigDcacheSetAssoc = 4,
+  parameter CVA6ConfigDcacheLineWidth = 128,
+  parameter CVA6ConfigNrScoreboardEntries = 0,
+  parameter CVA6ConfigNrLoadPipeRegs = 0,
+  parameter CVA6ConfigNrStorePipeRegs = 0,
+  parameter CVA6ConfigNrLoadBufEntries = 0,
+  parameter CVA6ConfigRASDepth = 2,
+  parameter CVA6ConfigBTBEntries = 0,
+  parameter CVA6ConfigBHTEntries = 0,
+  parameter CVA6ConfigNrPMPEntries = 0,
+  parameter CVA6ConfigPerfCounterEn = 0

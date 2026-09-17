@@ -1,0 +1,3 @@
+
+parameter TWO_STAGE_SHIFT = 1'b0,
+parameter BARREL_SHIFTER  = 1'b1,

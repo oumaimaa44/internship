@@ -1,0 +1,7 @@
+
+parameter CVA6ConfigIcacheByteSize  = 2048,
+parameter CVA6ConfigIcacheSetAssoc  = 2,
+parameter CVA6ConfigIcacheLineWidth = 128,
+parameter CVA6ConfigDcacheByteSize  = 4096,
+parameter CVA6ConfigDcacheSetAssoc  = 4,
+parameter CVA6ConfigDcacheLineWidth = 128,

@@ -1,0 +1,3 @@
+
+parameter TWO_CYCLE_COMPARE = 1'b0,
+parameter TWO_CYCLE_ALU     = 1'b0,

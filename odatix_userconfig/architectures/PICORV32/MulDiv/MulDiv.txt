@@ -1,0 +1,4 @@
+
+parameter ENABLE_MUL = 1'b1,
+parameter ENABLE_FAST_MUL = 1'b0,
+parameter ENABLE_DIV = 1'b1

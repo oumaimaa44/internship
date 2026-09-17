@@ -1,0 +1,40 @@
+###########################################
+# Settings for AsteRISC_RV32I_soc_10S-10S #
+###########################################
+
+rtl_path: neorv32/rtl/core
+top_level_file: neorv32_wrapper.vhd
+top_level_module: neorv32_wrapper
+rtl_file_format: .sv
+clock_signal: clk_i
+reset_signal: rst_ni
+
+use_parameters: true
+start_delimiter: "-- <main>"
+stop_delimiter: "-- </main>"
+
+
+
+fmax_synthesis:
+  lower_bound: 0
+  upper_bound: 350
+custom_freq_synthesis:
+  list:
+  - 50
+
+xc7s25-csga225-1:
+  fmax_synthesis:
+    lower_bound: 50
+    upper_bound: 170
+xc7a100t-csg324-1:
+  fmax_synthesis:
+    lower_bound: 0
+    upper_bound: 300
+xc7k70t-fbg676-2:
+  fmax_synthesis:
+    lower_bound: 80
+    upper_bound: 300
+ST28CMOSFDSOI:
+  fmax_synthesis:
+    lower_bound: 500
+    upper_bound: 2000

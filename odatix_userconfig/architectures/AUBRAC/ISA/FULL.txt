@@ -1,0 +1,5 @@
+
+parameter EXT_ZICSR_USE  = 1,
+parameter EXT_ZICNTR_USE = 1,
+parameter EXT_ZBS_USE    = 1,
+parameter EXT_U_USE      = 1,
