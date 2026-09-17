@@ -17,8 +17,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_counters is
   generic (
@@ -196,7 +196,7 @@ begin
   if ZICNTR_EN generate
 
     -- [m]cycle[h] --
-    cycle_inst: entity neorv32.neorv32_prim_cnt
+    cycle_inst: entity work.neorv32_prim_cnt
     generic map (
       CWIDTH => 64
     )
@@ -222,7 +222,7 @@ begin
     time_rd <= time_q when (cnt_re(1) = '1') else (others => '0');
 
     -- [m]instret[h] --
-    instret_inst: entity neorv32.neorv32_prim_cnt
+    instret_inst: entity work.neorv32_prim_cnt
     generic map (
       CWIDTH => 64
     )
@@ -257,7 +257,7 @@ begin
     for i in 3 to (HPM_NUM + 3) - 1 generate
 
       -- [m]hpmcnt[3..31][h] --
-      hpmcnt_inst: entity neorv32.neorv32_prim_cnt
+      hpmcnt_inst: entity work.neorv32_prim_cnt
       generic map (
         CWIDTH => HPM_WIDTH
       )

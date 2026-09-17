@@ -11,8 +11,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_bus_switch is
   generic (
@@ -166,8 +166,8 @@ end neorv32_bus_switch_rtl;
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_bus_reg is
   generic (
@@ -257,8 +257,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_bus_gateway is
   generic (
@@ -460,8 +460,8 @@ end neorv32_bus_gateway_rtl;
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_bus_io_switch is
   generic (
@@ -584,7 +584,7 @@ begin
 
   -- In/Out Register Stages -----------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_bus_reg_inst: entity neorv32.neorv32_bus_reg
+  neorv32_bus_reg_inst: entity work.neorv32_bus_reg
   generic map (
     REQ_REG_EN => true,
     RSP_REG_EN => true
@@ -695,8 +695,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_bus_amo_rmw is
   port (
@@ -849,8 +849,8 @@ end neorv32_bus_amo_rmw_rtl;
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_bus_amo_rvs is
   port (

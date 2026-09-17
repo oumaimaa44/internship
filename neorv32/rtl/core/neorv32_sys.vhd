@@ -11,8 +11,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_sys_reset is
   port (
@@ -91,8 +91,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_sys_clock is
   port (

@@ -14,9 +14,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
-use neorv32.neorv32_bootrom_image.all;
+library work;
+use work.neorv32_package.all;
+use work.neorv32_bootrom_image.all;
 
 entity neorv32_bootrom_rom is
   generic (

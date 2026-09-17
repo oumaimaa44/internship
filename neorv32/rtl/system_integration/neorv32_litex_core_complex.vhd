@@ -30,8 +30,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_litex_core_complex is
   generic (

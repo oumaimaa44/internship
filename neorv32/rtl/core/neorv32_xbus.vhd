@@ -14,8 +14,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_xbus is
   generic (
@@ -51,7 +51,7 @@ begin
 
   -- Optional Register Stage(s) -------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  reg_stage_inst: entity neorv32.neorv32_bus_reg
+  reg_stage_inst: entity work.neorv32_bus_reg
   generic map (
     REQ_REG_EN => REGSTAGE_EN,
     RSP_REG_EN => REGSTAGE_EN

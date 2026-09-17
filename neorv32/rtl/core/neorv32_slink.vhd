@@ -12,8 +12,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_slink is
   generic (
@@ -149,7 +149,7 @@ begin
 
   -- RX Data FIFO ---------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  rx_fifo_inst: entity neorv32.neorv32_prim_fifo
+  rx_fifo_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_rx_fifo_c,
     DWIDTH  => 1+4+32, -- last + routing + data
@@ -193,7 +193,7 @@ begin
 
   -- TX Data FIFO ---------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  tx_fifo_inst: entity neorv32.neorv32_prim_fifo
+  tx_fifo_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_tx_fifo_c,
     DWIDTH  => 1+4+32, -- last + routing + data

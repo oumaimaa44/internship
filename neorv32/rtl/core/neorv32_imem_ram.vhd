@@ -14,8 +14,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_imem_ram is
   generic (
@@ -42,7 +42,7 @@ begin
   -- 4x byte-wide RAMs --
   ram_gen:
   for i in 0 to 3 generate
-    ram_inst: entity neorv32.neorv32_prim_spram
+    ram_inst: entity work.neorv32_prim_spram
     generic map (
       AWIDTH => AWIDTH-2,
       DWIDTH => 8,

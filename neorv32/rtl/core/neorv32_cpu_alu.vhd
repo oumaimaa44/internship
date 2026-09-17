@@ -12,8 +12,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_alu is
   generic (
@@ -144,7 +144,7 @@ begin
 
   -- ALU[I]-Opcode Co-Processor: Shifter Unit (Base ISA) ------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_alu_shifter_inst: entity neorv32.neorv32_cpu_alu_shifter
+  neorv32_cpu_alu_shifter_inst: entity work.neorv32_cpu_alu_shifter
   generic map (
     FAST_SHIFT_EN => FAST_SHIFT_EN -- use barrel shifter for shift operations
   )
@@ -165,7 +165,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_alu_muldiv_enabled:
   if RISCV_ISA_M or RISCV_ISA_Zmmul generate
-    neorv32_cpu_alu_muldiv_inst: entity neorv32.neorv32_cpu_alu_muldiv
+    neorv32_cpu_alu_muldiv_inst: entity work.neorv32_cpu_alu_muldiv
     generic map (
       FAST_MUL_EN => FAST_MUL_EN, -- use DSPs for faster multiplication
       DIVISION_EN => RISCV_ISA_M  -- implement divider hardware
@@ -194,7 +194,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_alu_bitmanip_enabled:
   if RISCV_ISA_Zba or RISCV_ISA_Zbb or RISCV_ISA_Zbc or RISCV_ISA_Zbkb or RISCV_ISA_Zbkc or RISCV_ISA_Zbkx or RISCV_ISA_Zbs generate
-    neorv32_cpu_alu_bitmanip_inst: entity neorv32.neorv32_cpu_alu_bitmanip
+    neorv32_cpu_alu_bitmanip_inst: entity work.neorv32_cpu_alu_bitmanip
     generic map (
       FAST_SHIFT => FAST_SHIFT_EN,  -- use barrel shifter for shift operations
       ZBA        => RISCV_ISA_Zba,  -- address-generation instruction
@@ -231,7 +231,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_alu_fpu_enabled:
   if RISCV_ISA_Zfinx generate
-    neorv32_cpu_alu_fpu_inst: entity neorv32.neorv32_cpu_alu_fpu
+    neorv32_cpu_alu_fpu_inst: entity work.neorv32_cpu_alu_fpu
     port map (
       -- global control --
       clk_i       => clk_i,                       -- global clock, rising edge
@@ -272,7 +272,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_alu_cfu_enabled:
   if RISCV_ISA_Xcfu generate
-    neorv32_cpu_alu_cfu_inst: entity neorv32.neorv32_cpu_alu_cfu
+    neorv32_cpu_alu_cfu_inst: entity work.neorv32_cpu_alu_cfu
     port map (
       -- global control --
       clk_i    => clk_i,             -- global clock, rising edge
@@ -327,7 +327,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_alu_cond_enabled:
   if RISCV_ISA_Zicond generate
-    neorv32_cpu_alu_cond_inst: entity neorv32.neorv32_cpu_alu_cond
+    neorv32_cpu_alu_cond_inst: entity work.neorv32_cpu_alu_cond
     port map (
       -- global control --
       clk_i   => clk_i,        -- global clock, rising edge
@@ -352,7 +352,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_alu_crypto_enabled:
   if RISCV_ISA_Zknd or RISCV_ISA_Zkne or RISCV_ISA_Zknh or RISCV_ISA_Zksed or RISCV_ISA_Zksh generate
-    neorv32_cpu_alu_crypto_inst: entity neorv32.neorv32_cpu_alu_crypto
+    neorv32_cpu_alu_crypto_inst: entity work.neorv32_cpu_alu_crypto
     generic map (
       EN_ZKND  => RISCV_ISA_Zknd,  -- NIST AES decryption extension
       EN_ZKNE  => RISCV_ISA_Zkne,  -- NIST AES encryption extension

@@ -12,8 +12,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_sdi is
   generic (
@@ -148,7 +148,7 @@ begin
   -- -------------------------------------------------------------------------------------------
 
   -- TX --
-  tx_fifo_inst: entity neorv32.neorv32_prim_fifo
+  tx_fifo_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_fifo_size_c,
     DWIDTH  => 8,
@@ -176,7 +176,7 @@ begin
 
 
   -- RX --
-  rx_fifo_inst: entity neorv32.neorv32_prim_fifo
+  rx_fifo_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_fifo_size_c,
     DWIDTH  => 8,

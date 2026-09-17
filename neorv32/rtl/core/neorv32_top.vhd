@@ -15,8 +15,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_top is
   generic (
@@ -471,7 +471,7 @@ begin
   if true generate
 
     -- Reset Sequencer --
-    neorv32_sys_reset_inst: entity neorv32.neorv32_sys_reset
+    neorv32_sys_reset_inst: entity work.neorv32_sys_reset
     port map (
       clk_i       => clk_i,
       rstn_ext_i  => rstn_i,
@@ -484,7 +484,7 @@ begin
     );
 
     -- Clock Divider / Pulse Generator --
-    neorv32_sys_clock_inst: entity neorv32.neorv32_sys_clock
+    neorv32_sys_clock_inst: entity work.neorv32_sys_clock
     port map (
       clk_i    => clk_i,
       rstn_i   => rstn_sys,
@@ -522,7 +522,7 @@ begin
 
     -- CPU Core -------------------------------------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_cpu_inst: entity neorv32.neorv32_cpu
+    neorv32_cpu_inst: entity work.neorv32_cpu
     generic map (
       -- General --
       HART_ID             => i,
@@ -606,7 +606,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_icache_enabled:
     if ICACHE_EN generate
-      neorv32_icache_inst: entity neorv32.neorv32_cache
+      neorv32_icache_inst: entity work.neorv32_cache
       generic map (
         NUM_BLOCKS => ICACHE_NUM_BLOCKS,
         BLOCK_SIZE => CACHE_BLOCK_SIZE,
@@ -635,7 +635,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_dcache_enabled:
     if DCACHE_EN generate
-      neorv32_dcache_inst: entity neorv32.neorv32_cache
+      neorv32_dcache_inst: entity work.neorv32_cache
       generic map (
         NUM_BLOCKS => DCACHE_NUM_BLOCKS,
         BLOCK_SIZE => CACHE_BLOCK_SIZE,
@@ -662,7 +662,7 @@ begin
 
     -- Core Instruction/Data Bus Switch -------------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_core_bus_switch_inst: entity neorv32.neorv32_bus_switch
+    neorv32_core_bus_switch_inst: entity work.neorv32_bus_switch
     generic map (
       ROUND_ROBIN_EN => false, -- use prioritizing arbitration
       A_READ_ONLY    => false,
@@ -689,7 +689,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   core_complex_dual:
   if num_cores_c = 2 generate
-    neorv32_complex_arbiter_inst: entity neorv32.neorv32_bus_switch
+    neorv32_complex_arbiter_inst: entity work.neorv32_bus_switch
     generic map (
       ROUND_ROBIN_EN => true, -- fair (and lockable) scheduling
       A_READ_ONLY    => false,
@@ -722,7 +722,7 @@ begin
 
     -- DMA Controller -------------------------------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_dma_inst: entity neorv32.neorv32_dma
+    neorv32_dma_inst: entity work.neorv32_dma
     generic map (
       DSC_FIFO => IO_DMA_DSC_FIFO
     )
@@ -738,7 +738,7 @@ begin
 
     -- DMA Bus Switch -------------------------------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_dma_bus_switch_inst: entity neorv32.neorv32_bus_switch
+    neorv32_dma_bus_switch_inst: entity work.neorv32_bus_switch
     generic map (
       ROUND_ROBIN_EN => false, -- use prioritizing arbitration
       A_READ_ONLY    => false,
@@ -778,7 +778,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_bus_amo_rmw_enabled:
     if RISCV_ISA_Zaamo generate
-      neorv32_bus_amo_rmw_inst: entity neorv32.neorv32_bus_amo_rmw
+      neorv32_bus_amo_rmw_inst: entity work.neorv32_bus_amo_rmw
       port map (
         clk_i      => clk_i,
         rstn_i     => rstn_sys,
@@ -799,7 +799,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_bus_amo_rvs_enabled:
     if RISCV_ISA_Zalrsc generate
-      neorv32_bus_amo_rvs_inst: entity neorv32.neorv32_bus_amo_rvs
+      neorv32_bus_amo_rvs_inst: entity work.neorv32_bus_amo_rvs
       port map (
         clk_i      => clk_i,
         rstn_i     => rstn_sys,
@@ -822,7 +822,7 @@ begin
   -- Address Region Gateway
   -- **************************************************************************************************************************
 
-  neorv32_bus_gateway_inst: entity neorv32.neorv32_bus_gateway
+  neorv32_bus_gateway_inst: entity work.neorv32_bus_gateway
   generic map (
     TMO_INT => int_bus_tmo_c,
     TMO_EXT => XBUS_TIMEOUT,
@@ -871,7 +871,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_imem_enabled:
     if IMEM_EN generate
-      neorv32_imem_inst: entity neorv32.neorv32_imem
+      neorv32_imem_inst: entity work.neorv32_imem
       generic map (
         MEM_SIZE => imem_size_c,
         MEM_INIT => imem_as_rom_c,
@@ -894,7 +894,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_dmem_enabled:
     if DMEM_EN generate
-      neorv32_dmem_inst: entity neorv32.neorv32_dmem
+      neorv32_dmem_inst: entity work.neorv32_dmem
       generic map (
         MEM_SIZE => dmem_size_c,
         OUTREG   => DMEM_OUTREG_EN
@@ -916,7 +916,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_xbus_enabled:
     if XBUS_EN generate
-      neorv32_xbus_inst: entity neorv32.neorv32_xbus
+      neorv32_xbus_inst: entity work.neorv32_xbus
       generic map (
         REGSTAGE_EN => XBUS_REGSTAGE_EN
       )
@@ -964,7 +964,7 @@ begin
 
     -- IO Switch ------------------------------------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_bus_io_switch_inst: entity neorv32.neorv32_bus_io_switch
+    neorv32_bus_io_switch_inst: entity work.neorv32_bus_io_switch
     generic map (
       DEV_SIZE  => mem_io_dev_size_c,
       DEV_00_EN => bootrom_en_c,      DEV_00_BASE => base_io_bootrom_c,
@@ -1043,7 +1043,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_bootrom_enabled:
     if bootrom_en_c generate
-      neorv32_boot_rom_inst: entity neorv32.neorv32_bootrom
+      neorv32_boot_rom_inst: entity work.neorv32_bootrom
       port map (
         clk_i     => clk_i,
         rstn_i    => rstn_sys,
@@ -1061,7 +1061,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_cfs_enabled:
     if IO_CFS_EN generate
-      neorv32_cfs_inst: entity neorv32.neorv32_cfs
+      neorv32_cfs_inst: entity work.neorv32_cfs
       port map (
         clk_i       => clk_i,
         rstn_i      => rstn_sys,
@@ -1084,7 +1084,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_sdi_enabled:
     if IO_SDI_EN generate
-      neorv32_sdi_inst: entity neorv32.neorv32_sdi
+      neorv32_sdi_inst: entity work.neorv32_sdi
       generic map (
         RTX_FIFO => IO_SDI_FIFO
       )
@@ -1112,7 +1112,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_gpio_enabled:
     if io_gpio_en_c generate
-      neorv32_gpio_inst: entity neorv32.neorv32_gpio
+      neorv32_gpio_inst: entity work.neorv32_gpio
       generic map (
         GPIO_NUM => IO_GPIO_NUM,
         GPIO_DIR => IO_GPIO_DIR_EN
@@ -1141,7 +1141,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_wdt_enabled:
     if IO_WDT_EN generate
-      neorv32_wdt_inst: entity neorv32.neorv32_wdt
+      neorv32_wdt_inst: entity work.neorv32_wdt
       port map (
         clk_i      => clk_i,
         rstn_ext_i => rstn_ext,
@@ -1164,7 +1164,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_clint_enabled:
     if IO_CLINT_EN generate
-      neorv32_clint_inst: entity neorv32.neorv32_clint
+      neorv32_clint_inst: entity work.neorv32_clint
       generic map (
         NUM_HARTS => num_cores_c
       )
@@ -1203,7 +1203,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_uart0_enabled:
     if IO_UART0_EN generate
-      neorv32_uart0_inst: entity neorv32.neorv32_uart
+      neorv32_uart0_inst: entity work.neorv32_uart
       generic map (
         UART_RX_FIFO => IO_UART0_RX_FIFO,
         UART_TX_FIFO => IO_UART0_TX_FIFO
@@ -1234,7 +1234,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_uart1_enabled:
     if IO_UART1_EN generate
-      neorv32_uart1_inst: entity neorv32.neorv32_uart
+      neorv32_uart1_inst: entity work.neorv32_uart
       generic map (
         UART_RX_FIFO => IO_UART1_RX_FIFO,
         UART_TX_FIFO => IO_UART1_TX_FIFO
@@ -1265,7 +1265,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_spi_enabled:
     if IO_SPI_EN generate
-      neorv32_spi_inst: entity neorv32.neorv32_spi
+      neorv32_spi_inst: entity work.neorv32_spi
       generic map (
         IO_SPI_FIFO => IO_SPI_FIFO
       )
@@ -1296,7 +1296,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_twi_enabled:
     if IO_TWI_EN generate
-      neorv32_twi_inst: entity neorv32.neorv32_twi
+      neorv32_twi_inst: entity work.neorv32_twi
       generic map (
         IO_TWI_FIFO => IO_TWI_FIFO
       )
@@ -1326,7 +1326,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_twd_enabled:
     if IO_TWD_EN generate
-      neorv32_twd_inst: entity neorv32.neorv32_twd
+      neorv32_twd_inst: entity work.neorv32_twd
       generic map (
         TWD_RX_FIFO => IO_TWD_RX_FIFO,
         TWD_TX_FIFO => IO_TWD_TX_FIFO
@@ -1355,7 +1355,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_pwm_enabled:
     if io_pwm_en_c generate
-      neorv32_pwm_inst: entity neorv32.neorv32_pwm
+      neorv32_pwm_inst: entity work.neorv32_pwm
       generic map (
         NUM_CHANNELS => IO_PWM_NUM
       )
@@ -1379,7 +1379,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_trng_enabled:
     if IO_TRNG_EN generate
-      neorv32_trng_inst: entity neorv32.neorv32_trng
+      neorv32_trng_inst: entity work.neorv32_trng
       generic map (
         TRNG_FIFO => IO_TRNG_FIFO,
         NUM_RO    => IO_TRNG_NUM_RO,
@@ -1405,7 +1405,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_neoled_enabled:
     if IO_NEOLED_EN generate
-      neorv32_neoled_inst: entity neorv32.neorv32_neoled
+      neorv32_neoled_inst: entity work.neorv32_neoled
       generic map (
         FIFO_DEPTH => IO_NEOLED_TX_FIFO
       )
@@ -1431,7 +1431,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_gptmr_enabled:
     if io_gptmr_en_c generate
-      neorv32_gptmr_inst: entity neorv32.neorv32_gptmr
+      neorv32_gptmr_inst: entity work.neorv32_gptmr
       generic map (
         NUM_SLICES => IO_GPTMR_NUM
       )
@@ -1455,7 +1455,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_onewire_enabled:
     if IO_ONEWIRE_EN generate
-      neorv32_onewire_inst: entity neorv32.neorv32_onewire
+      neorv32_onewire_inst: entity work.neorv32_onewire
       generic map (
         ONEWIRE_FIFO => IO_ONEWIRE_FIFO
       )
@@ -1482,7 +1482,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_slink_enabled:
     if IO_SLINK_EN generate
-      neorv32_slink_inst: entity neorv32.neorv32_slink
+      neorv32_slink_inst: entity work.neorv32_slink
       generic map (
         SLINK_RX_FIFO => IO_SLINK_RX_FIFO,
         SLINK_TX_FIFO => IO_SLINK_TX_FIFO
@@ -1521,7 +1521,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     neorv32_tracer_enabled:
     if IO_TRACER_EN generate
-      neorv32_tracer_inst: entity neorv32.neorv32_tracer
+      neorv32_tracer_inst: entity work.neorv32_tracer
       generic map (
         TRACE_DEPTH   => IO_TRACER_BUFFER,
         DUAL_CORE_EN  => DUAL_CORE_EN,
@@ -1548,7 +1548,7 @@ begin
 
     -- System Configuration Information Memory (SYSINFO) --------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_sysinfo_inst: entity neorv32.neorv32_sysinfo
+    neorv32_sysinfo_inst: entity work.neorv32_sysinfo
     generic map (
       BUS_TMO_INT       => int_bus_tmo_c,
       BUS_TMO_EXT       => XBUS_TIMEOUT,
@@ -1607,7 +1607,7 @@ begin
 
     -- On-Chip Debugger - Debug Transport Module (DTM) ----------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_debug_dtm_inst: entity neorv32.neorv32_debug_dtm
+    neorv32_debug_dtm_inst: entity work.neorv32_debug_dtm
     generic map (
       IDCODE_VERSION => (others => '0'), -- yet unused
       IDCODE_PARTID  => (others => '0'), -- yet unused
@@ -1626,7 +1626,7 @@ begin
 
     -- On-Chip Debugger - Debug Module (DM) ---------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_debug_dm_inst: entity neorv32.neorv32_debug_dm
+    neorv32_debug_dm_inst: entity work.neorv32_debug_dm
     generic map (
       NUM_HARTS     => num_cores_c,
       AUTHENTICATOR => ocd_auth_en_c

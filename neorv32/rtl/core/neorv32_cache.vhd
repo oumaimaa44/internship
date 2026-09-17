@@ -22,8 +22,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cache is
   generic (
@@ -528,7 +528,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   status_dirty_enabled:
   if not READ_ONLY generate
-    dirty_flag_inst: entity neorv32.neorv32_prim_spram
+    dirty_flag_inst: entity work.neorv32_prim_spram
     generic map (
       AWIDTH => index_size_f(NUM_BLOCKS),
       DWIDTH => 1,

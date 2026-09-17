@@ -15,8 +15,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu is
   generic (
@@ -213,7 +213,7 @@ begin
 
   -- Front-End (Instruction Fetch) ----------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_frontend_inst: entity neorv32.neorv32_cpu_frontend
+  neorv32_cpu_frontend_inst: entity work.neorv32_cpu_frontend
   generic map (
     HART_ID   => HART_ID,      -- hardware thread ID
     RISCV_C   => RISCV_ISA_C,  -- implement C ISA extension
@@ -238,7 +238,7 @@ begin
 
   -- Control Unit / Back-End (Instruction Execution) ----------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_control_inst: entity neorv32.neorv32_cpu_control
+  neorv32_cpu_control_inst: entity work.neorv32_cpu_control
   generic map (
     -- General --
     HART_ID             => HART_ID,             -- hardware thread ID
@@ -328,7 +328,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   trigger_module_enabled:
   if (RISCV_ISA_Sdtrig = true) and (NUM_HW_TRIGGERS > 0) generate
-    neorv32_cpu_hwtrig_inst: entity neorv32.neorv32_cpu_hwtrig
+    neorv32_cpu_hwtrig_inst: entity work.neorv32_cpu_hwtrig
     generic map (
       NUM_TRIGGERS => NUM_HW_TRIGGERS, -- number of implemented hardware triggers
       RISCV_ISA_U  => RISCV_ISA_U      -- RISC-V user-mode available
@@ -357,7 +357,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   cnts_enabled:
   if RISCV_ISA_Zicntr or RISCV_ISA_Zihpm generate
-    neorv32_cpu_counters_inst: entity neorv32.neorv32_cpu_counters
+    neorv32_cpu_counters_inst: entity work.neorv32_cpu_counters
     generic map (
       ZICNTR_EN    => RISCV_ISA_Zicntr,    -- base counters
       ZIHPM_EN     => RISCV_ISA_Zihpm,     -- hardware performance monitors (HPMs)
@@ -386,7 +386,7 @@ begin
 
   -- Register File --------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_regfile_inst: entity neorv32.neorv32_cpu_regfile
+  neorv32_cpu_regfile_inst: entity work.neorv32_cpu_regfile
   generic map (
     DWIDTH   => 32,             -- data width
     AWIDTH   => rf_awidth_c,    -- address width
@@ -409,7 +409,7 @@ begin
 
   -- Arithmetic/Logic Unit (ALU) and ALU Co-Processors --------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_alu_inst: entity neorv32.neorv32_cpu_alu
+  neorv32_cpu_alu_inst: entity work.neorv32_cpu_alu
   generic map (
     -- RISC-V ISA Extensions --
     RISCV_ISA_M      => RISCV_ISA_M,      -- mul/div extension
@@ -454,7 +454,7 @@ begin
 
   -- Load/Store Unit (LSU) ------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_lsu_inst: entity neorv32.neorv32_cpu_lsu
+  neorv32_cpu_lsu_inst: entity work.neorv32_cpu_lsu
   generic map (
     HART_ID => HART_ID,  -- hardware thread ID
     AMO_EN  => any_amo_c -- enable atomic memory accesses
@@ -485,7 +485,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   pmp_enabled:
   if RISCV_ISA_Smpmp generate
-    neorv32_cpu_pmp_inst: entity neorv32.neorv32_cpu_pmp
+    neorv32_cpu_pmp_inst: entity work.neorv32_cpu_pmp
     generic map (
       NUM_REGIONS => PMP_NUM_REGIONS,     -- number of regions
       GRANULARITY => PMP_MIN_GRANULARITY, -- minimal region granularity in bytes
@@ -521,7 +521,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   trace_enabled:
   if CPU_TRACE_EN generate
-    neorv32_cpu_trace_inst: entity neorv32.neorv32_cpu_trace
+    neorv32_cpu_trace_inst: entity work.neorv32_cpu_trace
     port map (
       -- global control --
       clk_i       => clk_i,         -- global clock, rising edge

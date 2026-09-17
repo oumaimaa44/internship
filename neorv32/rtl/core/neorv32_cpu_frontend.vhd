@@ -16,8 +16,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_frontend is
   generic (
@@ -210,7 +210,7 @@ begin
 
     -- Compressed Instructions Decoder --------------------------------------------------------
     -- -------------------------------------------------------------------------------------------
-    neorv32_cpu_decompressor_inst: entity neorv32.neorv32_cpu_decompressor
+    neorv32_cpu_decompressor_inst: entity work.neorv32_cpu_decompressor
     generic map (
       ZCB_EN => RISCV_ZCB
     )
@@ -323,8 +323,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_frontend_ipb is
   generic (

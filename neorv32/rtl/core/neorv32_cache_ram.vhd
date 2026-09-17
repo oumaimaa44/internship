@@ -14,8 +14,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cache_ram is
   generic (
@@ -47,7 +47,7 @@ begin
   assert false report "[NEORV32] Using default CACHE RAM component." severity note;
 
   -- tag RAM --
-  tag_ram_inst: entity neorv32.neorv32_prim_spram
+  tag_ram_inst: entity work.neorv32_prim_spram
   generic map (
     AWIDTH => IDX_WIDTH,
     DWIDTH => TAG_WIDTH,
@@ -68,7 +68,7 @@ begin
   -- data RAM --
   data_ram_gen:
   for i in 0 to 3 generate -- four individual byte RAMs per word
-    data_ram_inst: entity neorv32.neorv32_prim_spram
+    data_ram_inst: entity work.neorv32_prim_spram
     generic map (
       AWIDTH => IDX_WIDTH + OFS_WIDTH,
       DWIDTH => 8,

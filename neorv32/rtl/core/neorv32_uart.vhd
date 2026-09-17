@@ -18,8 +18,8 @@ use std.textio.all;
 -- RTL_SYNTHESIS ON
 -- pragma translate_on
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_uart is
   generic (
@@ -180,7 +180,7 @@ begin
 
   -- TX FIFO --------------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  tx_fifo_inst: entity neorv32.neorv32_prim_fifo
+  tx_fifo_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_tx_fifo_c,
     DWIDTH  => 8,
@@ -209,7 +209,7 @@ begin
 
   -- RX FIFO --------------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  rx_fifo_inst: entity neorv32.neorv32_prim_fifo
+  rx_fifo_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_rx_fifo_c,
     DWIDTH  => 8,

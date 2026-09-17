@@ -15,8 +15,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_clint is
   generic (
@@ -79,7 +79,7 @@ begin
 
   -- MTIME - Global Machine Timer -----------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_clint_mtime_inst: entity neorv32.neorv32_prim_cnt
+  neorv32_clint_mtime_inst: entity work.neorv32_prim_cnt
   generic map (
     CWIDTH => 64
   )

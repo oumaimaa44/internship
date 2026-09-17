@@ -15,8 +15,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_debug_dm is
   generic (
@@ -603,7 +603,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   authenticator_enabled:
   if AUTHENTICATOR generate
-    neorv32_debug_auth_inst: entity neorv32.neorv32_debug_auth
+    neorv32_debug_auth_inst: entity work.neorv32_debug_auth
     port map (
       -- global control --
       clk_i    => clk_i,

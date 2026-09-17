@@ -12,8 +12,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_tracer is
   generic (
@@ -207,7 +207,7 @@ begin
 
   -- Trace Buffer (implemented as FIFO) -----------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  trace_buffer_inst: entity neorv32.neorv32_prim_fifo
+  trace_buffer_inst: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_fifo_size_c,
     DWIDTH  => 2*32,
@@ -252,7 +252,7 @@ begin
   sim_trace0_enabled:
   if is_simulation_c and SIM_LOG_EN generate
     assert false report "[NEORV32] CPU 0 trace logging enabled -> " & SIM_LOG_FILE0 severity note;
-    neorv32_cpu_trace_simlog0_inst: entity neorv32.neorv32_cpu_trace_simlog
+    neorv32_cpu_trace_simlog0_inst: entity work.neorv32_cpu_trace_simlog
     generic map (
       LOG_FILE => SIM_LOG_FILE0
     )
@@ -267,7 +267,7 @@ begin
   sim_trace1_enabled:
   if is_simulation_c and SIM_LOG_EN and DUAL_CORE_EN generate
     assert false report "[NEORV32] CPU 1 trace logging enabled -> " & SIM_LOG_FILE1 severity note;
-    neorv32_cpu_trace_simlog1_inst: entity neorv32.neorv32_cpu_trace_simlog
+    neorv32_cpu_trace_simlog1_inst: entity work.neorv32_cpu_trace_simlog
     generic map (
       LOG_FILE => SIM_LOG_FILE1
     )

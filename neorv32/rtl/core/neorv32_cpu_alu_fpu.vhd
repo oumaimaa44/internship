@@ -27,8 +27,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_alu_fpu is
   generic (
@@ -805,7 +805,7 @@ begin
   end process multiplier_core;
 
   -- integer multiplier (unsigned only) --
-  multiplier_core_inst: entity neorv32.neorv32_prim_mul
+  multiplier_core_inst: entity work.neorv32_prim_mul
   generic map (
     DWIDTH => 24
   )
@@ -1515,8 +1515,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_alu_fpu_normalizer is
   generic (
@@ -1950,8 +1950,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_cpu_alu_fpu_f2i is
   generic (

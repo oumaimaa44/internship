@@ -12,8 +12,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library neorv32;
-use neorv32.neorv32_package.all;
+library work;
+use work.neorv32_package.all;
 
 entity neorv32_neoled is
   generic (
@@ -132,7 +132,7 @@ begin
 
   -- TX Buffer (FIFO) -----------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  data_buffer: entity neorv32.neorv32_prim_fifo
+  data_buffer: entity work.neorv32_prim_fifo
   generic map (
     AWIDTH  => log2_fifo_size_c,
     DWIDTH  => 34,
