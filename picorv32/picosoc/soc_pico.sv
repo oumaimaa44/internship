@@ -33,6 +33,9 @@
 // design are read in the correct order.
 `define PICOSOC_V
 
+`include "soc_config.sv"
+
+
 module picosoc (
 	input clk,
 	input resetn,
@@ -69,20 +72,28 @@ module picosoc (
 	input  flash_io2_di,
 	input  flash_io3_di
 );
-	parameter [0:0] BARREL_SHIFTER = 1;
-	parameter [0:0] ENABLE_MUL = 1;
-	parameter [0:0] ENABLE_DIV = 1;
-	parameter [0:0] ENABLE_FAST_MUL = 0;
-	parameter [0:0] ENABLE_COMPRESSED = 1;
+	// Parameters explored by Odatix.
+	parameter [0:0] ENABLE_REGS_16_31 = 1'b1;
+	parameter [0:0] ENABLE_REGS_DUALPORT = 1'b0;
+
+	parameter [0:0] TWO_STAGE_SHIFT = 1'b0;
+	parameter [0:0] BARREL_SHIFTER = 1'b0;
+
+	parameter [0:0] TWO_CYCLE_COMPARE = 1'b0;
+	parameter [0:0] TWO_CYCLE_ALU = 1'b0;
+
+	parameter [0:0] COMPRESSED_ISA = 1'b0;
+	parameter [0:0] CATCH_MISALIGN = 1'b1;
+	parameter [0:0] CATCH_ILLINSN = 1'b1;
+
+	parameter [0:0] ENABLE_MUL = 1'b0;
+	parameter [0:0] ENABLE_FAST_MUL = 1'b0;
+	parameter [0:0] ENABLE_DIV = 1'b0;
+
+	// Original PicoSoC parameters kept unchanged because they are not part of
+	// the Odatix exploration space.
 	parameter [0:0] ENABLE_COUNTERS = 1;
 	parameter [0:0] ENABLE_IRQ_QREGS = 0;
-	parameter [0:0] ENABLE_REGS_16_31    = 1;
-	parameter [0:0] ENABLE_REGS_DUALPORT = 1;
-	parameter [0:0] TWO_STAGE_SHIFT      = 1;
-	parameter [0:0] TWO_CYCLE_COMPARE    = 0;
-	parameter [0:0] TWO_CYCLE_ALU        = 0;
-	parameter [0:0] CATCH_MISALIGN       = 1;
-	parameter [0:0] CATCH_ILLINSN        = 1;
 
 	parameter integer MEM_WORDS = 256;
 	parameter [31:0] STACKADDR = (4*MEM_WORDS);       // end of memory
@@ -137,33 +148,33 @@ module picosoc (
 	assign mem_rdata = (iomem_valid && iomem_ready) ? iomem_rdata : spimem_ready ? spimem_rdata : ram_ready ? ram_rdata :
 			spimemio_cfgreg_sel ? spimemio_cfgreg_do : simpleuart_reg_div_sel ? simpleuart_reg_div_do :
 			simpleuart_reg_dat_sel ? simpleuart_reg_dat_do : 32'h 0000_0000;
-
+	`KEEP_HIERARCHY
 	picorv32 #(
-		.STACKADDR            (STACKADDR),
-		.PROGADDR_RESET       (PROGADDR_RESET),
-		.PROGADDR_IRQ         (PROGADDR_IRQ),
+		.STACKADDR(STACKADDR),
+		.PROGADDR_RESET(PROGADDR_RESET),
+		.PROGADDR_IRQ(PROGADDR_IRQ),
 
-		.ENABLE_REGS_16_31    (ENABLE_REGS_16_31),
-		.ENABLE_REGS_DUALPORT (ENABLE_REGS_DUALPORT),
+		.ENABLE_REGS_16_31(ENABLE_REGS_16_31),
+		.ENABLE_REGS_DUALPORT(ENABLE_REGS_DUALPORT),
 
-		.TWO_STAGE_SHIFT      (TWO_STAGE_SHIFT),
-		.BARREL_SHIFTER       (BARREL_SHIFTER),
+		.TWO_STAGE_SHIFT(TWO_STAGE_SHIFT),
+		.BARREL_SHIFTER(BARREL_SHIFTER),
 
-		.TWO_CYCLE_COMPARE    (TWO_CYCLE_COMPARE),
-		.TWO_CYCLE_ALU        (TWO_CYCLE_ALU),
+		.TWO_CYCLE_COMPARE(TWO_CYCLE_COMPARE),
+		.TWO_CYCLE_ALU(TWO_CYCLE_ALU),
 
-		.COMPRESSED_ISA       (ENABLE_COMPRESSED),
-		.CATCH_MISALIGN       (CATCH_MISALIGN),
-		.CATCH_ILLINSN        (CATCH_ILLINSN),
+		.COMPRESSED_ISA(COMPRESSED_ISA),
+		.CATCH_MISALIGN(CATCH_MISALIGN),
+		.CATCH_ILLINSN(CATCH_ILLINSN),
 
-		.ENABLE_COUNTERS      (ENABLE_COUNTERS),
+		.ENABLE_COUNTERS(ENABLE_COUNTERS),
+		.ENABLE_MUL(ENABLE_MUL),
+		.ENABLE_FAST_MUL(ENABLE_FAST_MUL),
+		.ENABLE_DIV(ENABLE_DIV),
 
-		.ENABLE_MUL           (ENABLE_MUL),
-		.ENABLE_DIV           (ENABLE_DIV),
-		.ENABLE_FAST_MUL      (ENABLE_FAST_MUL),
-
-		.ENABLE_IRQ           (1),
-		.ENABLE_IRQ_QREGS     (ENABLE_IRQ_QREGS)
+		// Keep the original PicoSoC IRQ configuration fixed.
+		.ENABLE_IRQ(1),
+		.ENABLE_IRQ_QREGS(ENABLE_IRQ_QREGS)
 	) cpu (
 		.clk         (clk        ),
 		.resetn      (resetn     ),
@@ -176,7 +187,7 @@ module picosoc (
 		.mem_rdata   (mem_rdata  ),
 		.irq         (irq        )
 	);
-
+	`KEEP_HIERARCHY
 	spimemio spimemio (
 		.clk    (clk),
 		.resetn (resetn),
@@ -207,7 +218,7 @@ module picosoc (
 		.cfgreg_di(mem_wdata),
 		.cfgreg_do(spimemio_cfgreg_do)
 	);
-
+	`KEEP_HIERARCHY
 	simpleuart simpleuart (
 		.clk         (clk         ),
 		.resetn      (resetn      ),
@@ -228,7 +239,7 @@ module picosoc (
 
 	always @(posedge clk)
 		ram_ready <= mem_valid && !mem_ready && mem_addr < 4*MEM_WORDS;
-
+	`KEEP_HIERARCHY
 	`PICOSOC_MEM #(
 		.WORDS(MEM_WORDS)
 	) memory (
@@ -280,4 +291,3 @@ module picosoc_mem #(
 		if (wen[3]) mem[addr][31:24] <= wdata[31:24];
 	end
 endmodule
-
