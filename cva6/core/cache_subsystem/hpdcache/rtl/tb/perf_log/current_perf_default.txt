@@ -1,3 +1,0 @@
-cycles=177913
-read_miss_rate=0.182755
-write_miss_rate=0.563467

@@ -450,8 +450,7 @@ module fpnew_cast_multi #(
       if ((input_exp_q >= signed'(fpnew_pkg::int_width(int_fmt_q2) - 1 + op_mod_q2))    // Exponent larger than max int range,
           && !(!op_mod_q2                                                               // unless cast to signed int
                && input_sign_q                                                          // and input value is larges negative int value
-               && (input_exp_q == signed'(fpnew_pkg::int_width(int_fmt_q2) - 1))
-               && (input_mant_q == {1'b1, {INT_MAN_WIDTH-1{1'b0}}}))) begin
+               && (input_exp_q == signed'(fpnew_pkg::int_width(int_fmt_q2) - 1)))) begin
         denorm_shamt    = '0; // prevent shifting
         of_before_round = 1'b1;
       // underflow
@@ -584,7 +583,9 @@ module fpnew_cast_multi #(
     if (FpFmtConfig[fmt]) begin : active_format
       always_comb begin : post_process
         // detect of / uf
-        fmt_uf_after_round[fmt] = rounded_abs[EXP_BITS+MAN_BITS-1:MAN_BITS] == '0; // denormal
+        fmt_uf_after_round[fmt] = (rounded_abs[EXP_BITS+MAN_BITS-1:MAN_BITS] == '0) // denormal
+            || ((pre_round_abs[EXP_BITS+MAN_BITS-1:MAN_BITS] == '0) && (rounded_abs[EXP_BITS+MAN_BITS-1:MAN_BITS] == 1) &&
+               ((round_sticky_bits != 2'b11) || (!destination_mant[NUM_FP_STICKY-1] && ((rnd_mode_q == fpnew_pkg::RNE) || (rnd_mode_q == fpnew_pkg::RMM)))));
         fmt_of_after_round[fmt] = rounded_abs[EXP_BITS+MAN_BITS-1:MAN_BITS] == '1; // inf exp.
 
         // Assemble regular result, nan box short ones. Int zeroes need to be detected`
@@ -620,7 +621,7 @@ module fpnew_cast_multi #(
   end
   
   assign rounded_int_res = ifmt_rounded_signed_res[int_fmt_q2];
-  assign rounded_int_res_zero = (rounded_int_res == '0);
+  assign rounded_int_res_zero = (rounded_int_res == '0) && (pre_round_abs == '0);
 
   // Detect integer overflows after rounding (only positives)
   for (genvar ifmt = 0; ifmt < int'(NUM_INT_FORMATS); ifmt++) begin : gen_int_overflow
@@ -634,6 +635,14 @@ module fpnew_cast_multi #(
         if (!rounded_sign && input_exp_q == signed'(INT_WIDTH - 2 + op_mod_q2)) begin
           // Check whether the rounded MSB differs from unrounded MSB
           ifmt_of_after_round[ifmt] = ~rounded_int_res[INT_WIDTH-2+op_mod_q2];
+        end
+        // Negative overflow: value at exp=INT_WIDTH-1 rounded more negative than INT_MIN
+        // This can happen with RDN/RNE when fractional bits cause rounding away from zero.
+        // Detect by checking if the negated magnitude overflowed INT_MIN's bit position.
+        if (!op_mod_q2 && rounded_sign && input_exp_q == signed'(INT_WIDTH - 1)) begin
+            ifmt_of_after_round[ifmt] = ~rounded_uint_res[INT_WIDTH-1];
+            // If bit INT_WIDTH-1 is set in the two's complement negative result, it means
+            // -(magnitude) underflowed past INT_MIN = -2^(INT_WIDTH-1)
         end
       end
     end else begin : inactive_format
