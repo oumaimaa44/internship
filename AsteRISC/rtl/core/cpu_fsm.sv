@@ -1,0 +1,583 @@
+/**********************************************************************\
+*                               AsteRISC                               *
+************************************************************************
+*
+* Copyright (C) 2022 Jonathan Saussereau
+*
+* This file is part of AsteRISC.
+* AsteRISC is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+* 
+* AsteRISC is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with AsteRISC. If not, see <https://www.gnu.org/licenses/>.
+*
+*/
+
+`ifndef __CPU_FSM__
+`define __CPU_FSM__
+
+`ifdef VIVADO
+ `include "packages/pck_control.sv"
+`else
+ `include "core/packages/pck_control.sv"
+`endif
+
+//TODO: (p_decode_buf && p_mem_buf) => remove second memory cycle -> do it in next decode state 
+//TODO: HANDLE BUSY INSTRUCTION MEMORY:
+
+module cpu_fsm 
+  import pck_control::*;
+#(
+  parameter p_rf_sp        = 0,       //! register file is a single port ram
+  parameter p_rf_read_buf  = 0,       //! register file has synchronous read
+  parameter p_branch_pred  = 0,       //! branch prediction scheme (0 = off, 1 = static, 2 = dynamic)
+  parameter p_fetch_buf    = 0,       //! add buffers to fetch stage output
+  parameter p_decode_buf   = 0,       //! add buffers to decode stage outputs
+  parameter p_mem_buf      = 0,       //! add buffers to mem stage inputs
+  parameter p_branch_buf   = 0,       //! add buffers to alu comp outputs (+1 cycle for conditionnal branches)
+  parameter p_wait_for_ack = 0,       //! wait for data bus acknowledgement
+  parameter p_wb_buf       = 0,       //! add buffers to write back stage inputs
+  parameter p_overlap      = 0        //! fold the write back state into the execute state (see below)
+)(
+  input  wire          i_clk,         //! global clock
+  input  wire          i_rst,         //! global reset
+  input  wire          i_sleep,       //! active high sleep control
+
+  input  wire          i_refetch,     //! fetch again
+  input  wire          i_exec_done,   //! execute stage done
+  input  sel_br_e      i_sel_br,      //! branch
+  input  wire          i_dmem_wr,     //! data memory write
+  input  wire          i_dmem_rd,     //! data memory read
+  input  wire          i_wb,          //! write back
+  input  wire          i_cond_branch, //! conditionnal branch
+  input  wire          i_jump_reg,    //! jump register
+  input  wire          i_bad_predict, //! bad branch prediction
+
+  input  wire          i_rf_rd2_used, //! register file read port 2 is used
+  input  wire          i_rf_busy,     //! regfile busy
+
+  input  wire          i_dbus_busy,   //! data bus busy
+  input  wire          i_dbus_ack,    //! data bus acknowledge
+
+  input  wire          i_ibus_busy,   //! instruction bus busy
+  input  wire          i_ibus_ack,    //! instruction bus acknowledge
+  
+  output logic         o_en_fetch,    //! fetch next instruction
+  output logic         o_update_pc,   //! update program counter
+  output logic         o_en_decomp,   //! enable decompressor
+  output logic         o_update_comp, //! update decompressor fsm
+  output logic         o_en_decode,   //! enable decode
+  output logic         o_en_rf_rd1,   //! read first register (used only if p_rf_sp = 1)
+  output logic         o_en_rf_rd2,   //! read second register (used only if p_rf_sp = 1)
+  output logic         o_en_exec,     //! enable execution
+  output logic         o_en_dmem_wr,  //! data memory write enable
+  output logic         o_en_dmem_rd,  //! data memory read enable
+  output logic         o_en_wb,       //! write back enable
+  output logic         o_wb_state,    //! currently in write back state
+  output logic         o_speculate_branch, //! launch a conditional branch prediction
+  output logic         o_resolve_branch    //! resolve a pending conditional branch prediction
+);
+
+  typedef enum logic [3:0] {
+    st_init,
+    st_refetch,
+    st_refetch2,
+    st_fetch_buf,
+    st_decode,
+    st_read_rf,
+    st_read_rf_sp,
+    st_execute,
+    st_execute_buf,
+    st_branch_recover,
+    st_atom_memory,
+    st_memory,
+    st_memory_prebuf,
+    st_write_back,
+    st_write_back_buf
+  } fsm_state_e;
+
+  //! state reached once a fetch has been issued: with `p_fetch_buf` the
+  //! instruction word is only available one cycle later, hence the bubble.
+  localparam fsm_state_e fetch_next_state = p_fetch_buf   ? st_fetch_buf
+                                          : p_decode_buf  ? st_decode
+                                          : p_rf_read_buf ? st_read_rf
+                                          :                 st_execute;
+
+  //! `p_overlap` folds the write back state into the execute state. It relies
+  //! on `cpu_fetch` driving the instruction bus combinationally (same parameter
+  //! there), so an instruction word requested during cycle N is already on the
+  //! bus during cycle N+1 instead of N+2. The straight line loop then becomes
+  //! `st_execute -> st_execute` (CPI 1) instead of `st_execute -> st_write_back
+  //! -> st_execute` (CPI 2).
+  //!
+  //! The counterpart is that the instruction word is no longer guaranteed to
+  //! survive the state that follows execute: any instruction that still needs
+  //! its own encoding after execute (loads and stores read `adder_out`,
+  //! `rf_rd2_data` and `wb_addr` out of the combinational decode) must issue its
+  //! fetch one state later than it does without overlap. Hence the shifted
+  //! `exec_en_fetch` / `mem_en_fetch` conditions below, and the fetch moved into
+  //! `st_write_back` for loads.
+  //!
+  //! `p_wb_buf` and `p_rf_read_buf` stay legal: the depth-1 register file bypass
+  //! (`p_bypass` in `cpu_regfile`) covers the resulting write-to-read hazard, so
+  //! the only thing left to do here is to stop inserting the `st_write_back_buf`
+  //! bubble that existed only to wait for the buffered write. `p_fetch_buf`,
+  //! `p_decode_buf` and `p_branch_buf` remain unsupported (see `cpu_core`).
+  localparam logic overlap_on = (p_overlap != 0);
+
+  //! an instruction that commits its result during `st_execute` itself
+  wire overlap_commit = overlap_on && !i_dmem_rd && !i_dmem_wr &&
+                        !(p_branch_buf && (i_cond_branch || i_jump_reg));
+
+  fsm_state_e last_state;             //! last fsm state
+  fsm_state_e curr_state;             //! current fsm state
+  fsm_state_e next_state;             //! next fsm state
+
+
+  logic init_update_pc;
+  logic exec_en_fetch;
+  logic exec_update_pc;
+  logic mem_en_fetch;
+  logic mem_update_pc;
+  logic mem_en_wb;
+
+  logic state_change;
+  logic branch_prediction_pending;
+
+  //! high on the first cycle spent in the current state. A state the fsm only
+  //! ever spends one cycle in has it high throughout, so gating with it changes
+  //! nothing until something actually makes the fsm wait.
+  wire  first_cycle = (curr_state != last_state);
+
+  logic [ 7: 0] state_counter;
+
+  //! the sequencing is the same whatever the scheme predicts: a conditionnal
+  //! branch is speculated instead of being waited for
+  localparam logic branch_pred_on = (p_branch_pred != 0);
+  wire speculative_cond_branch = branch_pred_on && p_branch_buf && i_cond_branch;
+  wire wait_for_branch_result = p_branch_buf &&
+                                (i_jump_reg || (i_cond_branch && !branch_pred_on));
+
+  //! determine mealy machine outputs
+  always_comb begin
+    init_update_pc = !i_rf_busy && state_change; 
+    // without overlap only a load defers its fetch; with overlap a store has to
+    // defer it too, because the store still reads its own encoding in st_memory
+    exec_en_fetch  = overlap_on ? (!i_dmem_rd && !i_dmem_wr) : !i_dmem_rd;
+    exec_update_pc = exec_en_fetch && state_change;
+    // ... and the load defers it one state further, down to st_write_back
+    mem_en_fetch   = (overlap_on ? i_dmem_wr : i_dmem_rd)
+                     && !i_dbus_busy && (!p_wait_for_ack || i_dbus_ack);
+    mem_update_pc  = mem_en_fetch && state_change;
+    mem_en_wb      = i_wb && !i_dmem_rd; // do not write back in mem stage if load from memory (write back at wb stage)
+  end
+
+  
+  //! update the current state every clock cycle
+  always_ff @(posedge i_clk) begin: update_curr_state
+    if (i_rst) begin
+      curr_state <= st_init;
+      last_state <= st_init;
+    end else begin
+      if (!i_sleep) begin
+        curr_state <= next_state;
+        last_state <= curr_state;
+      end
+    end
+  end
+
+  always_ff @(posedge i_clk) begin: update_branch_prediction_pending
+    if (i_rst) begin
+      branch_prediction_pending <= 1'b0;
+    end else if (!i_sleep) begin
+      if (curr_state == st_execute_buf && branch_prediction_pending && !i_ibus_busy) begin
+        branch_prediction_pending <= 1'b0;
+      end else if (curr_state == st_execute && speculative_cond_branch &&
+                   exec_en_fetch && state_change) begin
+        branch_prediction_pending <= 1'b1;
+      end
+    end
+  end
+
+  //! decode next state
+  always_comb begin: next_state_decoder
+    state_change = 1'b1; // by default, we consider we are changing state
+
+    case (curr_state)
+      st_init: begin
+        if (!i_ibus_busy) begin // wait for instruction memory to be ready
+          next_state = fetch_next_state;
+        end else begin
+          next_state = st_init;
+          state_change = 1'b0;
+        end
+      end
+      st_refetch: begin
+        if (!i_ibus_busy) begin // wait for instruction memory to be ready
+          next_state = st_refetch2;
+        end else begin
+          next_state = st_init;
+          state_change = 1'b0;
+        end
+      end
+      st_refetch2: begin
+        next_state = p_decode_buf  ? st_decode     : p_rf_read_buf ? st_read_rf : st_execute;
+      end
+      st_fetch_buf: begin
+        next_state = p_decode_buf ? st_decode : p_rf_read_buf ? st_read_rf : st_execute;
+      end
+      st_decode: begin
+        next_state = p_rf_read_buf ? st_read_rf : st_execute;
+      end
+      st_read_rf: begin
+        next_state = (p_rf_sp && i_rf_rd2_used) ? st_read_rf_sp : st_execute;
+      end
+      st_read_rf_sp: begin
+        next_state = st_execute;
+      end
+      st_execute: begin
+        if (i_exec_done) begin
+          if (i_dmem_wr || i_dmem_rd) begin
+            next_state = p_mem_buf ? st_memory_prebuf : st_memory;
+          end else if (p_branch_buf && (i_cond_branch || i_jump_reg)) begin
+            next_state = st_execute_buf;
+          end else if (overlap_on) begin
+            if (i_ibus_busy) begin // hold in execute instead of stalling in write back
+              next_state = st_execute;
+              state_change = 1'b0;
+            end else begin
+              // `fetch_next_state` is `st_execute` unless `p_rf_read_buf` is
+              // set, in which case the synchronous read still needs its state
+              next_state = i_refetch ? st_refetch : fetch_next_state;
+            end
+          end else begin
+            next_state = st_write_back;
+          end
+        end else begin
+          next_state = st_execute;
+          state_change = 1'b0;
+        end
+      end
+      st_execute_buf: begin
+        if (branch_prediction_pending) begin
+          if (i_ibus_busy) begin
+            next_state = st_execute_buf;
+            state_change = 1'b0;
+          end else if (i_bad_predict) begin
+            next_state = st_branch_recover;
+          end else begin
+            next_state = fetch_next_state;
+          end
+        end else begin
+          next_state = st_write_back;
+        end
+      end
+      st_branch_recover: begin
+        if (!i_ibus_busy) begin
+          next_state = fetch_next_state;
+        end else begin
+          next_state = st_branch_recover;
+          state_change = 1'b0;
+        end
+      end
+      st_memory_prebuf: begin
+        next_state = st_memory;
+      end
+      st_memory: begin
+        if (!i_dbus_busy && (!p_wait_for_ack || i_dbus_ack)) begin  // wait for data memory to be ready
+          if (i_dmem_rd) begin
+            next_state = st_write_back;
+          end else begin
+            if (!i_ibus_busy) begin // wait for instruction memory to be ready
+              next_state = i_refetch ? st_refetch : fetch_next_state;
+            end else begin
+              next_state = st_memory;
+              state_change = 1'b0;
+            end
+          end
+        end else begin
+          next_state = st_memory;
+          state_change = 1'b0;
+        end
+      end
+      st_write_back: begin
+        if (!i_ibus_busy && !(p_branch_pred && i_bad_predict)) begin // wait for instruction memory to be ready
+          // with overlap the bypass serves the buffered write directly, so the
+          // extra state that used to wait for it is not needed any more
+          if (!overlap_on && p_wb_buf && !p_decode_buf) begin
+            next_state = st_write_back_buf;
+          end else begin
+            next_state = i_refetch ? st_refetch : fetch_next_state; 
+          end
+        end else begin
+          next_state = st_write_back;
+          state_change = 1'b0;
+        end
+      end
+      st_write_back_buf: begin
+        next_state = i_refetch ? st_refetch : fetch_next_state; 
+      end
+      default: begin
+        next_state = st_init; 
+      end
+    endcase
+  end
+
+  //! decode output signals
+  always_comb begin: output_signals
+    o_speculate_branch = 1'b0;
+    o_resolve_branch   = 1'b0;
+
+    case (curr_state)
+      st_init: begin
+        o_en_fetch    = 1'b1;          // fetch the first instruction
+        o_update_pc   = init_update_pc;// fetch the first instruction
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b1;          // decode the first instruction
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_refetch: begin
+        o_en_fetch    = 1'b1;          // fetch the first instruction
+        o_update_pc   = 1'b0;
+        o_en_decomp   = state_change;
+        o_update_comp = state_change;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_refetch2: begin
+        o_en_fetch    = 1'b0;          // fetch the first instruction
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b1;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_fetch_buf: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b1;          // instruction word lands in the fetch buffer
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_decode: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b1;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b1;          // decode the current instruction
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_read_rf: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b1;          // decode the current instruction
+        o_en_rf_rd1   = 1'b1;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_read_rf_sp: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b1;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_execute: begin
+        o_speculate_branch = speculative_cond_branch && exec_en_fetch && state_change;
+        o_en_fetch    = exec_en_fetch && !wait_for_branch_result && state_change;
+        o_update_pc   = exec_en_fetch && !wait_for_branch_result &&
+                        !speculative_cond_branch && state_change;
+        o_en_decomp   = p_decode_buf ? 1'b0 : 1'b1;
+        o_update_comp = overlap_commit && state_change;
+        o_en_decode   = 1'b1;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b1;
+        o_en_dmem_wr  = i_dmem_wr;     // write as soon as posible
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = overlap_commit && i_wb && state_change; // merged write back
+        o_wb_state    = 1'b0;
+      end
+      st_execute_buf: begin
+        o_resolve_branch   = branch_prediction_pending && !i_ibus_busy;
+        o_en_fetch    = exec_en_fetch && !branch_prediction_pending;
+        o_update_pc   = branch_prediction_pending ? !i_ibus_busy : exec_en_fetch;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b1;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0; 
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_branch_recover: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_memory_prebuf: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = i_dmem_rd;     // wait for the value
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      st_memory: begin
+        o_en_fetch    = mem_en_fetch;
+        o_update_pc   = mem_en_fetch && state_change;
+        o_en_decomp   = 1'b0;
+        o_update_comp = !i_dmem_rd;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = i_dmem_rd;     // wait for the value
+        o_en_wb       = mem_en_wb;
+        o_wb_state    = 1'b0;
+      end
+      st_write_back: begin
+        // with overlap this state is only reached by a load: it is where the
+        // load commits, and therefore the first state where the instruction
+        // word may be replaced -- so this is where the load issues its fetch
+        o_en_fetch    = overlap_on && i_dmem_rd && state_change;
+        o_update_pc   = overlap_on && i_dmem_rd && state_change;
+        o_en_decomp   = 1'b0;
+        o_update_comp = overlap_on ? state_change
+                                   : (!(p_wb_buf && !p_decode_buf) && state_change);
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = i_dmem_rd;     // keeping read enable high 
+                                       // to make sure the bridge outputs the value
+        // `st_write_back` waits here while the instruction memory is busy, and
+        // a write back is not idempotent: `addi rd, rd, 1` held for four cycles
+        // would add four. It is asserted on the first cycle of the state rather
+        // than on the last because that is the cycle the value is right --
+        // `cpu_write_back` buffers its inputs in a free running register, which
+        // reloads with whatever the datapath produces while the state waits.
+        // Nothing ever stalled the instruction bus before, so neither mattered;
+        // a cache does stall it.
+        o_en_wb       = (overlap_on ? (i_wb && i_dmem_rd) : i_wb) && first_cycle; // write back
+        o_wb_state    = 1'b1;
+      end
+      st_write_back_buf: begin
+        o_en_fetch    = 1'b0;//i_refetch;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b1;
+        o_en_decode   = 1'b0;          // decode the current instruction
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+      default: begin
+        o_en_fetch    = 1'b0;
+        o_update_pc   = 1'b0;
+        o_en_decomp   = 1'b0;
+        o_update_comp = 1'b0;
+        o_en_decode   = 1'b0;
+        o_en_rf_rd1   = 1'b0;
+        o_en_rf_rd2   = 1'b0;
+        o_en_exec     = 1'b0;
+        o_en_dmem_wr  = 1'b0;
+        o_en_dmem_rd  = 1'b0;
+        o_en_wb       = 1'b0;
+        o_wb_state    = 1'b0;
+      end
+    endcase
+  end
+
+  // count cycles in same state
+  always_ff @(posedge i_clk) begin: cycles_in_same_state
+    if (i_rst) begin
+      state_counter <= 8'd0;
+    end else begin
+      if (curr_state != last_state) begin
+        state_counter <= 8'd0;
+      end else begin
+        state_counter <= state_counter + 1;
+      end
+    end
+  end
+
+endmodule
+
+`endif // __CPU_FSM__
