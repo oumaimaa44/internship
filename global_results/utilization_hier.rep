@@ -1,0 +1,41 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Fri Sep 11 16:17:24 2026
+| Host         : naouna.ims.bordeaux running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+| Command      : report_utilization -hierarchical
+| Design       : soc_top_cva6
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Optimized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++------------------------+-----------------------------+------------+------------+---------+------+--------+--------+--------+------------+
+|        Instance        |            Module           | Total LUTs | Logic LUTs | LUTRAMs | SRLs |   FFs  | RAMB36 | RAMB18 | DSP Blocks |
++------------------------+-----------------------------+------------+------------+---------+------+--------+--------+--------+------------+
+| soc_top_cva6           |                       (top) |     154180 |     154180 |       0 |    0 | 328645 |     48 |      0 |          4 |
+|   (soc_top_cva6)       |                       (top) |          0 |          0 |       0 |    0 |      0 |      0 |      0 |          0 |
+|   u_apb_interconnect   |            apb_interconnect |         25 |         25 |       0 |    0 |      0 |      0 |      0 |          0 |
+|   u_axi_interconnect   |           axil_interconnect |        127 |        127 |       0 |    0 |     81 |      0 |      0 |          0 |
+|   u_axil_to_apb        |                 axil_to_apb |         19 |         19 |       0 |    0 |    107 |      0 |      0 |          0 |
+|   u_gpio0              |                    apb_gpio |         94 |         94 |       0 |    0 |    256 |      0 |      0 |          0 |
+|   u_processor          |            cva6_axi_wrapper |     153825 |     153825 |       0 |    0 | 328121 |     16 |      0 |          4 |
+|     (u_processor)      |            cva6_axi_wrapper |          0 |          0 |       0 |    0 |      0 |      0 |      0 |          0 |
+|     u_axi_dw_converter |            axi_dw_converter |       6340 |       6340 |       0 |    0 |   2120 |      0 |      0 |          0 |
+|     u_axi_to_axil      |             axi_to_axi_lite |       1539 |       1539 |       0 |    0 |    885 |      0 |      0 |          0 |
+|     u_cva6             |                        cva6 |     145946 |     145946 |       0 |    0 | 325116 |     16 |      0 |          4 |
+|   u_ram0               | axil_memory__parameterized0 |         77 |         77 |       0 |    0 |     74 |     16 |      0 |          0 |
+|   u_rom0               |                 axil_memory |         13 |         13 |       0 |    0 |      6 |     16 |      0 |          0 |
++------------------------+-----------------------------+------------+------------+---------+------+--------+--------+--------+------------+
+
+
+report_utilization: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 9885.984 ; gain = 0.000 ; free physical = 481704 ; free virtual = 644345
